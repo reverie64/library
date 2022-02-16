@@ -1,0 +1,24 @@
+:root {
+    background-image: url('./images/libWall.jpg');  
+    display: flex;
+    justify-content: center;
+ 
+}
+
+#container {
+    background-color: hsla(266, 12%, 89%, 0.72);
+    width: 400px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+}
+
+#book {
+    background-color: rgb(123, 121, 223);
+height: 100px;
+width: 100px;
+}
+
+button {
+    height: min-content;
+}
