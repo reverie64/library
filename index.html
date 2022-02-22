@@ -14,55 +14,58 @@
 <body>
     <div id="bg">
         <div id="container">
-            <div id="bookshelf"> bookshelf! </div>
+            <div id="bookshelf"> bookshelf! </div> <!-- allow naming of bookshelf-->
             <button id="remove">remove</button>
             <button id="new">new</button>
 
-            <form action="" id="form" method="post">
-                <fieldset>
-                    <legend>book details</legend>
-                    <label for="title">title</title></label>
-                    <input type="text" name="title" id="title" placeholder="title" required>
 
-                    <label for="author">author</label>
-                    <input type="text" name="author" id="author" placeholder="author">
+            <div id="formDiv" style="display: none;">
+                <form action="" id="form" method="post">
+                    <fieldset>
+                        <legend>book details</legend>
+                        <label for="title">title</title></label>
+                        <input type="text" name="title" id="title" placeholder="title" required>
 
-                    <label for="pages">pages</label>
-                    <input type="number" name="pages" id="pages" placeholder="pages">
+                        <label for="author">author</label>
+                        <input type="text" name="author" id="author" placeholder="author">
 
-                    <label for="start">start date</label>
-                    <input type="date" name="start" id="start"> <!-- today button or give placeholder of today -->
-                </fieldset>
-                <fieldset>
-                    <legend>finished</legend>
-                    <label for="end">end date</label>
-                    <input type="date" name="end" id="end">
+                        <label for="pages">pages</label>
+                        <input type="number" name="pages" id="pages" placeholder="pages">
 
-                    <select name="rating" id="rating">
-                        <option value="notyet">not scored yet</option>
-                        <option value="10">10</option>
-                        <option value="9">9</option>
-                        <option value="8">8</option>
-                        <option value="7">7</option>
-                        <option value="6">6</option>
-                        <option value="5">5</option>
-                        <option value="4">4</option>
-                        <option value="3">3</option>
-                        <option value="2">2</option>
-                        <option value="1">1</option>
-                    </select>
-                </fieldset>
+                        <label for="start">start date</label>
+                        <input type="date" name="start" id="start"> <!-- today button or give placeholder of today -->
+                        <label for="current">currently reading<input type="checkbox"></label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>finished</legend>
+                        <label for="end">end date</label>
+                        <input type="date" name="end" id="end">
 
-                <button type="submit">submit</button>
-                <button type="reset">reset</button>
-            </form>
+                        <select name="rating" id="rating">
+                            <option value="notyet">not scored yet</option>
+                            <option value="10">10</option>
+                            <option value="9">9</option>
+                            <option value="8">8</option>
+                            <option value="7">7</option>
+                            <option value="6">6</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                        </select>
+                    </fieldset>
 
-            read
-            <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-            </label>
+                    <button type="submit">submit</button>
+                    <button type="reset">reset</button>
+                </form>
 
+                read
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
 
         </div>
     </div>
