@@ -10,42 +10,43 @@ const toggle = document.querySelector('.switch');
 
 const newBut = document.querySelector('#new');
 const removeBut = document.querySelector('#remove');
+const submitBut = document.querySelector('#submit');
 const formDiv = document.querySelector('#formDiv');
 
 const read = document.getElementsByClassName('switch');
 
-let myLibrary = ['harry potter', 'noragami', 'fruits basket'];
+let myLibrary = [];
 
-/*
-function Book(title, author, pages, complete, numOfBook){ git commit -m "
+// for numOfBook : find the book.title's index of array and return in 
+// myLibrary
+
+function Book(title, author, pages, complete, numOfBook) {
     this.title = title // display each book
     this.author = author
     this.pages = pages
     this.complete = complete
-    this.info = function() {
-       return title, author, pages, complete
-    }
+    this.numOfBook = numOfBook
+  /*  this.info = function() {
+        console.log(title, author, pages, complete, numOfBook)
+       return title, author, pages, complete, numOfBook
+    }*/
 };
-//Object.create
-console.log(Book.info());
-*/
+//console.log(got.info());
 
-// display each book   // or use for each
+
+// display each book       
 function showBooks() {
     for (let i = 0; i < myLibrary.length; i++) {
         const bookCard = document.createElement('div');
         bookCard.classList.add('book');
-        bookCard.textContent = myLibrary[i];
+        bookCard.textContent = myLibrary[i].title;
         shelf.appendChild(bookCard);
     };
 };
 
-showBooks();
 
-
-
-// button allows user to input a new book through a popup form 
-function addBook() {
+// show hidden div with form for new book
+function showForm() {
     // click button, show form 
     // if (first click)
     formDiv.style.display = 'block';
@@ -53,18 +54,36 @@ function addBook() {
     // formDiv.style.display = 'none';
 };
 
-newBut.addEventListener('click', addBook)
+newBut.addEventListener('click', showForm)
 
+
+// button allows user to input a new book through a popup form 
+function addBook(title, author, pages, complete, numOfBook) {
+  let newBook = new Book(title, author, pages, complete, numOfBook);
+  myLibrary.push(newBook);
+};
+
+submitBut.addEventListener('click', addBook)
+
+addBook('game of thrones', 'george rr martin', '1000', 'yes', '0');
+addBook('harry potter', 'none :)', '500', 'yes', '1');
+addBook('noragami-1', 'adachitoka', '200', 'yes', '2');
 
 
 // button to remove book from library
 function removeBook() {
+myLibrary.splice()
     console.log('remove')
 };
 
 removeBut.addEventListener('click', removeBook)
 
-
+/* 
+ myLibrary arr
+find book index
+remove from array -- slipce
+return new arr
+*/
 
 // toggles book to read or unread based on book prototype
 function readBook() {
@@ -75,3 +94,22 @@ function readBook() {
 }
 
 toggle.addEventListener('click', readBook)
+
+showBooks();
+
+
+/* 
+QoL
+if start date = today, automatically check box for currently reading
+name and have multply bookshelves
+sort bookshelves
+*/
+
+
+/* later updates for better code:
+showBooks() - use for each instead of for loop
+REMOVE button - change to just one button? 
+    update to filter
+
+*/
+

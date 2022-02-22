@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+ /* --book: 1;*/
 }
 
 #bg {
@@ -27,7 +28,9 @@
 
 #shelf {
   display: grid;
-  grid-template-rows: repeat(3, 1fr);
+ /* grid-template-rows: repeat(var(--book), 1fr);
+  grid-template-columns: repeat(var(--book), 1fr);*/
+  grid-template-rows: repeat(5, 1fr);
 }
 
 .book {
