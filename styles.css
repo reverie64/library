@@ -37,8 +37,8 @@
 
 .book {
   background-color: #a8c1d1;
-  height: 150px;
-  width: 100px;
+  height: 200px;
+  width: 150px;
   margin: 3px;
   border-radius: 10px;
 
@@ -131,11 +131,11 @@ a:visited {
 }
 
 input:checked+.slider {
-  background-color: #a8c1d1;
+  background-color: #86B093;
 }
 
 input:focus+.slider {
-  box-shadow: 0 0 1px #a8c1d1;
+  box-shadow: 0 0 1px #86B093;
 }
 
 input:checked+.slider:before {

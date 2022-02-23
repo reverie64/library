@@ -10,8 +10,6 @@ const complete = document.getElementById('complete');
 const end = document.getElementById('end');
 const rating = document.getElementById('rating');
 
-const toggle = document.querySelector('.complete');
-
 const newBut = document.querySelector('#new');
 const removeBut = document.querySelector('#remove');
 const submitBut = document.querySelector('#submit');
@@ -22,7 +20,7 @@ const read = document.getElementsByClassName('switch');
 let myLibrary = [];
 
 function Book(title, author, pages, start, current, complete, end, rating) {
-    this.title = title 
+    this.title = title
     this.author = author
     this.pages = pages
     this.start = start
@@ -47,13 +45,17 @@ function showBooks() {
 };
 
 
-// show hidden div with form for new book
+// click button to show div with form for new book / click again to hide
+// change button text new / hide
 function showForm() {
-    // click button, show form 
-    // if (first click)
-    formDiv.style.display = 'block';
-    // else ---- next click
-    // formDiv.style.display = 'none';
+    display = window.getComputedStyle(formDiv, null).getPropertyValue('display');
+    if (display === 'none') {
+        formDiv.style.display = 'block';
+        newBut.textContent = 'hide'
+    } else {
+        formDiv.style.display = 'none';
+        newBut.textContent = 'new'
+    };
 };
 
 newBut.addEventListener('click', showForm)
@@ -65,8 +67,8 @@ function addBook(title, author, pages, start, current, complete, end, rating) {
     author = author.value
     pages = pages.value
     start = start.value
-    current = current.value
-    complete = complete.value
+    current = current.checked
+    complete = complete.checked
     end = end.value
     rating = rating.value
 
@@ -78,47 +80,65 @@ function addBook(title, author, pages, start, current, complete, end, rating) {
     bookCard.textContent = newBook.title;
     shelf.appendChild(bookCard);
     console.log(newBook);
+    readToggle(bookCard);
+    trashCan(bookCard);
 };
 
-submitBut.addEventListener('click', () => addBook(title, author, pages, start, current, complete, end, rating)
+submitBut.addEventListener('click', () => addBook(title, author, pages, start, current, complete, end, rating));
 
-)
-/*
-addBook('game of thrones', 'george rr martin', '1000');
-addBook('harry potter', 'none :)', '500', 'yes');
-addBook('noragami-1', 'adachitoka', '200', 'yes');
+
+const selectBook = document.querySelector('.book')
+
+// update books after added to library
+
+
+// create trash button in DOM and give it click functionality
+function trashCan(bookCard) {
+    const trash = document.createElement('button');
+    trash.classList.add('can');
+    trash.textContent = 'remove';
+    bookCard.appendChild(trash);
+    trash.addEventListener('click', removeBook)
+};
+
+/* 
+ myLibrary arr , find book index which will be user selection
+remove from array, return new arr
 */
 
-
-
-// button to remove book from library
-function removeBook() {
-    //  myLibrary.findIndex(book => )
-
-    //myLibrary.filter(book => )
-
-
+// button to remove book from library - targeting array and DOM
+function removeBook(bookCard) {
+    //  myLibrary.splice(myLibrary.indexOf(bookCard),1)
+    //bookCard.shelf.removeChild(bookCard)
     console.log('remove')
 };
 
-removeBut.addEventListener('click', removeBook)
 
-/* 
- myLibrary arr
-find book index which will be user selection
-remove from array -- slipce/ filter
-return new arr
-*/
+// create read toggle in DOM 
+//TODO js working but css isn't 
 
-// toggles book to read or unread based on book prototype
+function readToggle(bookCard) {
+    const toggle = document.createElement('checkbox');
+    toggle.classList.add('complete');
+    bookCard.appendChild(toggle);
+    toggle.addEventListener('click', () => {
+        readBook();
+    });
+};
+
+//change to another check box/ toggle that will be on each book
+// toggles to update book to read or unread 
 function readBook() {
-    // if (first click)
-    console.log('read book')
-    // else 
-    //console.log('havent read')
-}
+    if (complete.checked == true) {
+        complete.checked = true
+        console.log('finished book')
+    } else {
+        complete.value = false
+        console.log('havent read book')
+    };
+};
 
-toggle.addEventListener('click', readBook)
+complete.addEventListener('click', readBook)
 
 showBooks();
 
@@ -131,6 +151,7 @@ add today button or give placeholder of today
 dont make two that are identical/ warn that this already exisits, do you want to cont?
 aloow name and have multply bookshelves
 sort bookshelves
+clear form on submit
 */
 
 /* later updates for better code:
