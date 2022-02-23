@@ -1,12 +1,16 @@
 const container = document.getElementById('container');
 const shelf = document.getElementById('bookshelf');
 
-const title1 = document.querySelector('#title');
-const author = document.querySelector('#author');
-const title = document.querySelector('#pages');
-const start = document.querySelector('#start');
-const end = document.querySelector('#end');
-const toggle = document.querySelector('.switch');
+const title = document.getElementById('title');
+const author = document.getElementById('author');
+const pages = document.getElementById('pages');
+const start = document.getElementById('start');
+const current = document.getElementById('current');
+const complete = document.getElementById('complete');
+const end = document.getElementById('end');
+const rating = document.getElementById('rating');
+
+const toggle = document.querySelector('.complete');
 
 const newBut = document.querySelector('#new');
 const removeBut = document.querySelector('#remove');
@@ -17,22 +21,20 @@ const read = document.getElementsByClassName('switch');
 
 let myLibrary = [];
 
-// for numOfBook : find the book.title's index of array and return in 
-// myLibrary
-
-function Book(title, author, pages, complete, numOfBook) {
-    this.title = title // display each book
+function Book(title, author, pages, start, current, complete, end, rating) {
+    this.title = title 
     this.author = author
     this.pages = pages
+    this.start = start
+    this.current = current
     this.complete = complete
-    this.numOfBook = numOfBook
-  /*  this.info = function() {
-        console.log(title, author, pages, complete, numOfBook)
-       return title, author, pages, complete, numOfBook
-    }*/
+    this.end = end
+    this.rating = rating
+    this.info = function () {
+        console.log(title, author, pages, complete, start, current, complete, end, rating)
+        return title, author, pages, complete, start, current, complete, end, rating
+    };
 };
-//console.log(got.info());
-
 
 // display each book       
 function showBooks() {
@@ -57,22 +59,45 @@ function showForm() {
 newBut.addEventListener('click', showForm)
 
 
-// button allows user to input a new book through a popup form 
-function addBook(title, author, pages, complete, numOfBook) {
-  let newBook = new Book(title, author, pages, complete, numOfBook);
-  myLibrary.push(newBook);
+// takes user input from form when submit button is pushed
+function addBook(title, author, pages, start, current, complete, end, rating) {
+    title = title.value
+    author = author.value
+    pages = pages.value
+    start = start.value
+    current = current.value
+    complete = complete.value
+    end = end.value
+    rating = rating.value
+
+    let newBook = new Book(title, author, pages, start, current, complete, end, rating);
+
+    myLibrary.push(newBook);
+    const bookCard = document.createElement('div');
+    bookCard.classList.add('book');
+    bookCard.textContent = newBook.title;
+    shelf.appendChild(bookCard);
+    console.log(newBook);
 };
 
-submitBut.addEventListener('click', addBook)
+submitBut.addEventListener('click', () => addBook(title, author, pages, start, current, complete, end, rating)
 
-addBook('game of thrones', 'george rr martin', '1000', 'yes', '0');
-addBook('harry potter', 'none :)', '500', 'yes', '1');
-addBook('noragami-1', 'adachitoka', '200', 'yes', '2');
+)
+/*
+addBook('game of thrones', 'george rr martin', '1000');
+addBook('harry potter', 'none :)', '500', 'yes');
+addBook('noragami-1', 'adachitoka', '200', 'yes');
+*/
+
 
 
 // button to remove book from library
 function removeBook() {
-myLibrary.splice()
+    //  myLibrary.findIndex(book => )
+
+    //myLibrary.filter(book => )
+
+
     console.log('remove')
 };
 
@@ -80,8 +105,8 @@ removeBut.addEventListener('click', removeBook)
 
 /* 
  myLibrary arr
-find book index
-remove from array -- slipce
+find book index which will be user selection
+remove from array -- slipce/ filter
 return new arr
 */
 
@@ -99,12 +124,14 @@ showBooks();
 
 
 /* 
-QoL
+Quality of life:
+click on book card for it to flip and displays info
 if start date = today, automatically check box for currently reading
-name and have multply bookshelves
+add today button or give placeholder of today 
+dont make two that are identical/ warn that this already exisits, do you want to cont?
+aloow name and have multply bookshelves
 sort bookshelves
 */
-
 
 /* later updates for better code:
 showBooks() - use for each instead of for loop
@@ -112,4 +139,3 @@ REMOVE button - change to just one button?
     update to filter
 
 */
-

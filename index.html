@@ -14,35 +14,44 @@
 <body>
     <div id="bg">
         <div id="container">
-            <div id="bookshelf"> bookshelf! </div> <!-- allow naming of bookshelf-->
-            <button id="remove">remove</button>
-            <button id="new">new</button>
-
-
+            <div id="bookshelf"> bookshelf! </div>
             <div id="formDiv" style="display: none;">
-                <form action="" id="form" method="post">
-                    <fieldset>
-                        <legend>book details</legend>
-                        <label for="title">title</title></label>
+
+                <fieldset>
+                    <legend>book details</legend>
+                    <label for="title">title
                         <input type="text" name="title" id="title" placeholder="title" required>
+                    </label>
 
-                        <label for="author">author</label>
+                    <label for="author">author
                         <input type="text" name="author" id="author" placeholder="author">
+                    </label>
 
-                        <label for="pages">pages</label>
+                    <label for="pages">pages
                         <input type="number" name="pages" id="pages" placeholder="pages">
+                    </label>
 
-                        <label for="start">start date</label>
-                        <input type="date" name="start" id="start"> <!-- today button or give placeholder of today -->
-                        <label for="current">currently reading<input type="checkbox"></label>
-                    </fieldset>
-                    <fieldset>
-                        <legend>finished</legend>
-                        <label for="end">end date</label>
+                    <label for="start">start date
+                        <input type="date" name="start" id="start">
+                    </label>
+
+                    <label for="current">currently reading
+                        <input type="checkbox" id="current" name="current" value="yes">
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>finished</legend>
+                    <label class="complete"> read
+                        <input type="checkbox" id="complete" value="yes">
+                        <span class="slider round"></span>
+                    </label>
+                    <label for="end">end date
                         <input type="date" name="end" id="end">
+                    </label>
 
+                    <label for="rating">
                         <select name="rating" id="rating">
-                            <option value="notyet">not scored yet</option>
+                            <option value="-">-</option>
                             <option value="10">10</option>
                             <option value="9">9</option>
                             <option value="8">8</option>
@@ -54,23 +63,25 @@
                             <option value="2">2</option>
                             <option value="1">1</option>
                         </select>
-                    </fieldset>
+                    </label>
+                </fieldset>
 
+
+                <label for="sumbit">
                     <button type="submit" id="submit">submit</button>
-                    <button type="reset">reset</button>
-                </form>
-
-                read
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
                 </label>
+                <label for="reset">
+                    <button type="reset">reset</button>
+                </label>
+
             </div>
 
+            <button id="remove">remove</button>
+            <button id="new">new</button>
         </div>
     </div>
-
-    <footer class="footer">made by kristin.</footer>
+    <footer class="footer"><a href="https://github.com/reverie64"> made by kristin.</a>
+    </footer>
 </body>
 
 </html>
