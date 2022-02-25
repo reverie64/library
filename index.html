@@ -1,84 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="styles.css" />
+        <script src="scripts.js" async></script>
+        <title>Library</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" async></script>
-    <title>Library</title>
-</head>
+    <body>
+        <div id="bg">
+            <div id="container">
+                <div id="bookshelf"><h2>my bookshelf!</h2></div>
+                <div id="formDiv" style="display: none">
+                    <fieldset>
+                        <legend>book details</legend>
+                        <label for="title"
+                            >title
+                            <input
+                                type="text"
+                                name="title"
+                                id="title"
+                                placeholder="title"
+                                required
+                            />
+                        </label>
 
+                        <label for="author"
+                            >author
+                            <input
+                                type="text"
+                                name="author"
+                                id="author"
+                                placeholder="author"
+                            />
+                        </label>
 
-<body>
-    <div id="bg">
-        <div id="container">
-            <div id="bookshelf"> bookshelf! </div>
-            <div id="formDiv" style="display: none;">
+                        <label for="pages"
+                            >pages
+                            <input
+                                type="number"
+                                name="pages"
+                                id="pages"
+                                placeholder="pages"
+                            />
+                        </label>
 
-                <fieldset>
-                    <legend>book details</legend>
-                    <label for="title">title
-                        <input type="text" name="title" id="title" placeholder="title" required>
+                        <label for="start"
+                            >start date
+                            <input type="date" name="start" id="start" />
+                        </label>
+
+                        <label for="current"
+                            >currently reading
+                            <input
+                                type="checkbox"
+                                id="current"
+                                name="current"
+                                value="yes"
+                            />
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>finished</legend>
+                        <label class="complete">
+                            read
+                            <input type="checkbox" name="complete" id="complete" value="yes" />
+                            <span class="sliderround"></span>
+                        </label>
+                        <label for="end"
+                            >end date
+                            <input type="date" name="end" id="end" />
+                        </label>
+
+                        <label for="rating">
+                            <select name="rating" id="rating">
+                                <option value="-">-</option>
+                                <option value="10">10</option>
+                                <option value="9">9</option>
+                                <option value="8">8</option>
+                                <option value="7">7</option>
+                                <option value="6">6</option>
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                        </label>
+                    </fieldset>
+
+                    <label for="reset">
+                        <button type="reset">reset</button>
                     </label>
+                    <label for="sumbit">
+                        <button type="submit" id="submit">submit</button>
+                    </label>
+                </div>
 
-                    <label for="author">author
-                        <input type="text" name="author" id="author" placeholder="author">
-                    </label>
-
-                    <label for="pages">pages
-                        <input type="number" name="pages" id="pages" placeholder="pages">
-                    </label>
-
-                    <label for="start">start date
-                        <input type="date" name="start" id="start">
-                    </label>
-
-                    <label for="current">currently reading
-                        <input type="checkbox" id="current" name="current" value="yes">
-                    </label>
-                </fieldset>
-                <fieldset>
-                    <legend>finished</legend>
-                    <label class="complete"> read
-                        <input type="checkbox" id="complete" value="yes">
-                        <span class="slider round"></span>
-                    </label>
-                    <label for="end">end date
-                        <input type="date" name="end" id="end">
-                    </label>
-
-                    <label for="rating">
-                        <select name="rating" id="rating">
-                            <option value="-">-</option>
-                            <option value="10">10</option>
-                            <option value="9">9</option>
-                            <option value="8">8</option>
-                            <option value="7">7</option>
-                            <option value="6">6</option>
-                            <option value="5">5</option>
-                            <option value="4">4</option>
-                            <option value="3">3</option>
-                            <option value="2">2</option>
-                            <option value="1">1</option>
-                        </select>
-                    </label>
-                </fieldset>
-
-                <label for="reset">
-                    <button type="reset">reset</button>
-                </label>
-                <label for="sumbit">
-                    <button type="submit" id="submit">submit</button>
-                </label>
+                <button id="new">new</button>
             </div>
-
-            <button id="new">new</button>
         </div>
-    </div>
-    <footer class="footer"><a href="https://github.com/reverie64"> made by kristin.</a>
-    </footer>
-</body>
-
+        <footer class="footer">
+            <a href="https://github.com/reverie64"> made by kristin.</a>
+        </footer>
+    </body>
 </html>
