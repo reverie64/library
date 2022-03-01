@@ -7,13 +7,17 @@
         <link rel="stylesheet" href="styles.css" />
         <script src="scripts.js" async></script>
         <title>Library</title>
+        <nav>
+            <h1>My Library</h1>
+            <label for="new">
+                <button id="new" name="new">new</button>
+            </label>    </nav>
     </head>
 
     <body>
-        <div id="bg">
-            <div id="container">
-                <div id="bookshelf"><h2>my bookshelf!</h2></div>
-                <div id="formDiv" style="display: none">
+        
+            <div id="formDiv" style="display: none">
+                <form id="form">
                     <fieldset>
                         <legend>book details</legend>
                         <label for="title"
@@ -64,17 +68,22 @@
                     </fieldset>
                     <fieldset>
                         <legend>finished</legend>
-                        <label class="complete">
-                            read
-                            <input type="checkbox" name="complete" id="complete" value="yes" />
+                        read <label class="complete">
+                         
+                            <input
+                                type="checkbox"
+                                name="complete"
+                                id="complete"
+                                value="yes"
+                            /> 
                             <span class="sliderround"></span>
-                        </label>
+                        </label> <br>
                         <label for="end"
                             >end date
                             <input type="date" name="end" id="end" />
                         </label>
 
-                        <label for="rating">
+                        <label for="rating"> rating
                             <select name="rating" id="rating">
                                 <option value="-">-</option>
                                 <option value="10">10</option>
@@ -97,13 +106,14 @@
                     <label for="sumbit">
                         <button type="submit" id="submit">submit</button>
                     </label>
-                </div>
-
-                <button id="new">new</button>
+                </form>
             </div>
+     
+
+        <div id="container">
+            <div id="bookshelf"><h2>my bookshelf!</h2></div>
         </div>
-        <footer class="footer">
-            <a href="https://github.com/reverie64"> made by kristin.</a>
-        </footer>
+
+        
     </body>
 </html>

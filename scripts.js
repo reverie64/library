@@ -10,15 +10,15 @@ const complete = document.getElementById("complete");
 const end = document.getElementById("end");
 const rating = document.getElementById("rating");
 
-const newBut = document.querySelector("#new");
-const removeBut = document.querySelector("#remove");
-const submitBut = document.querySelector("#submit");
-const formDiv = document.querySelector("#formDiv");
+const newBut = document.getElementById("new");
+const removeBut = document.getElementById("remove");
+const submitBut = document.getElementById("submit");
+const formDiv = document.getElementById("formDiv");
+const bookForm = document.getElementById("form");
 
 const read = document.getElementsByClassName("switch");
 
 let myLibrary = [];
-
 
 function Book(title, author, pages, start, current, complete, end, rating) {
     this.title = title;
@@ -53,8 +53,7 @@ function Book(title, author, pages, start, current, complete, end, rating) {
             rating
         );
     };
-};
-
+}
 
 // display each book
 function showBooks() {
@@ -63,8 +62,8 @@ function showBooks() {
         bookCard.classList.add("book");
         bookCard.textContent = myLibrary[i].title;
         shelf.appendChild(bookCard);
-    };
-};
+    }
+}
 
 // click button to show div with form for new book / click again to hide
 // change button text new / hide
@@ -78,12 +77,13 @@ function showForm() {
     } else {
         formDiv.style.display = "none";
         newBut.textContent = "new";
-    };
-};
+    }
+}
 
 newBut.addEventListener("click", showForm);
 
 // takes user input from form when submit button is pushed
+// generates book in DOM, along with buttons
 function addBook(title, author, pages, start, current, complete, end, rating) {
     title = title.value;
     author = author.value;
@@ -111,18 +111,24 @@ function addBook(title, author, pages, start, current, complete, end, rating) {
     bookCard.textContent = newBook.title;
     shelf.appendChild(bookCard);
     console.log(newBook);
-    console.log(bookCard.textContent);
+    //  console.log(bookCard.textContent);
     readToggle(bookCard);
     trashCan(bookCard);
-};
+}
 
-submitBut.addEventListener("click", () =>
-    addBook(title, author, pages, start, current, complete, end, rating)
-);
+function formFunc() {
+    event.preventDefault();
+    bookForm.reset();
+}
 
-const selectBook = document.querySelector(".book");
+submitBut.addEventListener("click", () => {
+    addBook(title, author, pages, start, current, complete, end, rating);
+    formFunc();
+});
 
-// update books after added to library
+//---
+// utilities to update books after added to myLibrary and shelf
+//---
 
 // create trash button in DOM and give it click functionality
 function trashCan(bookCard) {
@@ -130,22 +136,22 @@ function trashCan(bookCard) {
     trash.classList.add("can");
     trash.textContent = "remove";
     bookCard.appendChild(trash);
-    trash.addEventListener("click", removeBook);
-};
+}
 
-/* 
- myLibrary arr , find book index which will be user selection
-remove from array, return new arr
-*/
+// remove book from library - targeting array and DOM
 
-// button to remove book from library - targeting array and DOM
-function removeBook(bookCard) {
-    //  myLibrary.splice(myLibrary.indexOf(bookCard),1)
-    //bookCard.shelf.removeChild(bookCard)
-    console.log("remove");
-};
+shelf.addEventListener("click", function (e) {
+    if (e.target.classList != "can") return;
+    let selectBook = e.target.closest(".book");
+    selectBook.remove();
+    //remove from myLib arr
+    let index = selectBook.value;
+    myLibrary.splice(index, 1); // always splicing first item of array
+    console.log(myLibrary);
+});
 
 // create read / unread toggle in DOM
+//check box/ toggle on each bookCard
 
 function readToggle(bookCard) {
     const label = document.createElement("label");
@@ -163,21 +169,32 @@ function readToggle(bookCard) {
     bookCard.appendChild(label);
     label.appendChild(toggle);
     label.appendChild(span);
-    toggle.addEventListener("click", readBook);
-    //toggle.addEventListener("click", (e) => {
-    //  readBook(e);
-    //});
+    //  toggle.addEventListener("click", readBook);
 };
-//  complete = complete.checked;
 
-//check box/ toggle on each bookCard
+// click changes complete attribute to indicate read or unread
 
+// initial value is false // toggles to update book to read or unread
+//! EPIC failure :'(
+
+shelf.addEventListener("click", function (e) {
+    if (e.target.classList != "complete") return;
+    let selectBook = e.target.closest(".book");
+    //if (selectBook.complete.checked === false) { // update it to true
+    selectBook.complete.checked = true;
+    //} else {
+    //selectBook.complete.checked
+
+    //}
+    console.log(selectBook.complete.checked);
+});
+
+/*
 function readBook(bookCard) {
-    // initial value is false // toggles to update book to read or unread
+   
     // change to read
     console.log(bookCard.complete.checked);
-    //  let index = findIndex(this.Book) define on constructor
-    //first find book index in myLib then this will work
+    
     if (bookCard.complete === false) {
         // if clicked then update complete.checked = true
         complete.checked = true; // if the Book prototype read status is false change to true
@@ -188,9 +205,9 @@ function readBook(bookCard) {
         console.log(`nevermind, havent ${bookCard}`); // change back to unread
     };
     console.log(complete.checked);
-};
+};*/
 
-complete.addEventListener("click", readBook);
+//complete.addEventListener("click", readBook);
 
 showBooks();
 
@@ -203,12 +220,12 @@ add today button or give placeholder of today
 dont make two that are identical/ warn that this already exisits, do you want to cont?
 aloow name and have multply bookshelves
 sort bookshelves
-clear form on submit
+auto hide form on submit
 */
 
 /* later updates for better code:
 showBooks() - use for each instead of for loop
 REMOVE button - change to just one button? 
     update to filter
-
+event deglegation - cleaner.
 */
