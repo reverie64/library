@@ -53,7 +53,7 @@ function Book(title, author, pages, start, current, complete, end, rating) {
             rating
         );
     };
-}
+};
 
 // display each book
 function showBooks() {
@@ -62,8 +62,8 @@ function showBooks() {
         bookCard.classList.add("book");
         bookCard.textContent = myLibrary[i].title;
         shelf.appendChild(bookCard);
-    }
-}
+    };
+};
 
 // click button to show div with form for new book / click again to hide
 // change button text new / hide
@@ -77,8 +77,8 @@ function showForm() {
     } else {
         formDiv.style.display = "none";
         newBut.textContent = "new";
-    }
-}
+    };
+};
 
 newBut.addEventListener("click", showForm);
 
@@ -109,17 +109,20 @@ function addBook(title, author, pages, start, current, complete, end, rating) {
     const bookCard = document.createElement("div");
     bookCard.classList.add("book");
     bookCard.textContent = newBook.title;
+    bookCard.id = newBook.title;
     shelf.appendChild(bookCard);
-    console.log(newBook);
-    //  console.log(bookCard.textContent);
     readToggle(bookCard);
     trashCan(bookCard);
-}
+    console.log(bookCard.getAttribute('id'))
+};
 
+// on submit
 function formFunc() {
     event.preventDefault();
     bookForm.reset();
-}
+    // hide form again
+    showForm();
+};
 
 submitBut.addEventListener("click", () => {
     addBook(title, author, pages, start, current, complete, end, rating);
@@ -134,20 +137,24 @@ submitBut.addEventListener("click", () => {
 function trashCan(bookCard) {
     const trash = document.createElement("button");
     trash.classList.add("can");
-    trash.textContent = "remove";
+  //  trash.textContent = "remove";
     bookCard.appendChild(trash);
 }
 
 // remove book from library - targeting array and DOM
-
 shelf.addEventListener("click", function (e) {
     if (e.target.classList != "can") return;
     let selectBook = e.target.closest(".book");
-    selectBook.remove();
-    //remove from myLib arr
-    let index = selectBook.value;
-    myLibrary.splice(index, 1); // always splicing first item of array
-    console.log(myLibrary);
+
+ //let index = selectBook.textContent
+ //let index = selectBook.value;
+  let index = selectBook.getAttribute('id');
+ console.log(index)
+    myLibrary.splice(index, 1);
+   selectBook.remove();
+
+//myLibrary = myLibrary.filter(book => book !== index);
+console.log(myLibrary);
 });
 
 // create read / unread toggle in DOM
@@ -160,8 +167,9 @@ function readToggle(bookCard) {
     const toggle = document.createElement("input");
     toggle.type = "checkbox";
     toggle.name = "complete";
-    toggle.value = "yes";
+    //toggle.checked = "false";
     toggle.id = "complete";
+    toggle.classList.add('togs');
 
     const span = document.createElement("span");
     span.classList.add("sliderround");
@@ -169,44 +177,57 @@ function readToggle(bookCard) {
     bookCard.appendChild(label);
     label.appendChild(toggle);
     label.appendChild(span);
-    //  toggle.addEventListener("click", readBook);
 };
+
 
 // click changes complete attribute to indicate read or unread
 
-// initial value is false // toggles to update book to read or unread
-//! EPIC failure :'(
 
 shelf.addEventListener("click", function (e) {
-    if (e.target.classList != "complete") return;
-    let selectBook = e.target.closest(".book");
-    //if (selectBook.complete.checked === false) { // update it to true
-    selectBook.complete.checked = true;
+    if (e.target.classList != "togs") return;
+    let selectBook = e.target.closest(".book")
+    console.log(e.target.checked)
+})
+
+
+/*
+function readBook(e) {
+    // change to read
+    console.log(e.target.checked);
+
+    if (e.target.checked === false) {
+        // if clicked then update complete.checked = true
+        e.target.checked = true; // if the Book prototype read status is false change to true // change the book status
+      //  console.log(`now finished ${bookCard}`); // if clicked again
+        // change back  complete.checked = false
+   // } else {
+   //     complete.checked = false;
+     //   console.log(`nevermind, havent ${bookCard}`); // change back to unread
+    };
+
+
+
+//  let index = selectBook.getAttribute('id');
+ //console.log(index)
+    
+});*/
+
+
+//};
+
+// initial value is false // toggles to update book to read or unread
+
+  
+    //if (index.complete.checked === false) { // update it to true
+   // index.complete.checked = true;  
     //} else {
     //selectBook.complete.checked
 
     //}
-    console.log(selectBook.complete.checked);
-});
+  //  console.log(index.complete.checked);
 
-/*
-function readBook(bookCard) {
-   
-    // change to read
-    console.log(bookCard.complete.checked);
-    
-    if (bookCard.complete === false) {
-        // if clicked then update complete.checked = true
-        complete.checked = true; // if the Book prototype read status is false change to true
-        console.log(`now finished ${bookCard}`); // if clicked again
-        // change back  complete.checked = false
-    } else {
-        complete.checked = false;
-        console.log(`nevermind, havent ${bookCard}`); // change back to unread
-    };
-    console.log(complete.checked);
-};*/
 
+  // one more that is separate for the form div read toggle
 //complete.addEventListener("click", readBook);
 
 showBooks();
@@ -220,7 +241,6 @@ add today button or give placeholder of today
 dont make two that are identical/ warn that this already exisits, do you want to cont?
 aloow name and have multply bookshelves
 sort bookshelves
-auto hide form on submit
 */
 
 /* later updates for better code:
