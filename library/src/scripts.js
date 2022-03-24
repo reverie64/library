@@ -1,3 +1,7 @@
+
+/* in process of converting to react app */
+
+
 const container = document.getElementById("container");
 const shelf = document.getElementById("bookshelf");
 
@@ -20,40 +24,42 @@ const read = document.getElementsByClassName("switch");
 
 let myLibrary = [];
 
-function Book(title, author, pages, start, current, complete, end, rating, bookCard, index) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.start = start;
-    this.current = current;
-    this.complete = complete;
-    this.end = end;
-    this.rating = rating;
-    this.bookCard = bookCard;
-    this.index = function (){
-        index = myLibrary.findIndex(bookCard)
-        
+class Book {
+    constructor(title, author, pages, start, current, complete, end, rating, bookCard, index) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.start = start;
+        this.current = current;
+        this.complete = complete;
+        this.end = end;
+        this.rating = rating;
+        this.bookCard = bookCard;
+        this.index = function () {
+            index = myLibrary.findIndex(bookCard);
+
+        };
+        this.construct = function () {
+            bookCard = document.createElement('div');
+            shelf.appendChild(bookCard);
+            bookCard.classList.add('book');
+            bookCard.textContent = title;
+            bookCard.id = index;
+        };
+        /*this.info = function () {
+            return (
+                title,
+                author,
+                pages,
+                complete,
+                start,
+                current,
+                complete,
+                end,
+                rating
+            );*/
+        //};
     }
-      this.construct = function () {
-         bookCard = document.createElement('div');
-        shelf.appendChild(bookCard);
-        bookCard.classList.add('book');
-        bookCard.textContent = title;
-        bookCard.id = index
-    };
-    /*this.info = function () {
-        return (
-            title,
-            author,
-            pages,
-            complete,
-            start,
-            current,
-            complete,
-            end,
-            rating
-        );*/
-    //};
 }
 // this.index = myLibrary.findIndex(bookCard)
 
