@@ -1,19 +1,38 @@
 body {
-    background-color: #B2B1AD;
+    font-family: "IM Fell Great Primer", serif;
     color: #102257;
     margin: 0;
+    /*  background-color: #F1F1E1;*/
+    background-image: url("https://assets.website-files.com/60ffe15fbe0baf238818eec4/610178949d4c5ac82df89761_Interference.png");
 }
 
-
-#container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap; 
-  background-color: hsla(0, 0%, 100%, 0.4);
-   min-height: 80vh; 
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-height: 80vh;
     margin-left: calc(10%);
     margin-right: calc(10%);
- 
+}
+
+header {
+    width: 100%;
+    background-color: #b8a4cc;
+    display: flex;
+    box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1);
+    min-height: 5vh;
+    align-items: center;
+}
+
+.add-icon {
+    height: 50px;
+    display: flex;
+}
+
+.header-image {
+    height: 70px;
+    width: 70px;
+    background-color: none;
 }
 
 h2 {
@@ -24,71 +43,55 @@ h2 {
     width: 100%;
     height: fit-content;
     align-self: flex-start;
-    color: #102257;
 }
 
-#bookshelf {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  background-color: #95D9DA;
+.bookshelf {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: #95d9da; /* dbb5ae  */
     min-height: 60vh;
     width: 100%;
-
 }
 
-header {
- width: 100%;
-  background-color: #878fb1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  min-height: 5vh;
-  }
-  
-  h1 {
-    color: #102257;
+.trash-icon {
+    height: 70px;
+    width: 70px;
+}
 
-  }  
+.new-book {
+    text-align: left;
+}
 
-  #formDiv {
+.formDiv {
     font-size: 20px;
-    background-color: #878fb1;
+    background-color: #b8a4cc;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     width: 40vh;
-    position: absolute
+    position: absolute;
 }
 
-
 .book {
-    background-color: #079D93;
+    background-color: #079d93;
     height: 200px;
     width: 150px;
     margin: 3px;
     border-radius: 10px;
-  
 }
 
 button {
-  height: 34px;
-  width: 60px;
+    height: 34px;
+    width: 60px;
     border-radius: 34px;
-background-color: #F1F1E1;
-color: #102257;
+    background-color: #f1f1e1;
+    color: #102257;
 }
-
-
-
-
 
 :focus {
-    background-color: #9F75CF;
+    background-color: #cfcfde;
 }
-
-
-
 
 /*
 a {
@@ -126,7 +129,7 @@ a:visited {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #B2B1AD;
+    background-color: #cfcfde;
     -webkit-transition: 0.4s;
     transition: 0.4s;
 }
@@ -138,7 +141,7 @@ a:visited {
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: #F1F1E1;
+    background-color: #f1f1e1;
     -webkit-transition: 0.4s;
     transition: 0.4s;
 }

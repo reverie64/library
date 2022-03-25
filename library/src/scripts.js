@@ -42,7 +42,7 @@ class Book {
         this.construct = function () {
             bookCard = document.createElement('div');
             shelf.appendChild(bookCard);
-            bookCard.classList.add('book');
+         //   bookCard.classList.add('book');
             bookCard.textContent = title;
             bookCard.id = index;
         };
@@ -101,7 +101,7 @@ function showBooks() {
 };
 
 
-
+/*
 // click button to show div with form for new book / click again to hide
 // change button text new / hide
 function showForm() {
@@ -118,6 +118,7 @@ function showForm() {
 }
 
 newBut.addEventListener("click", showForm);
+*/
 
     // link form data to each bookcard
  /*   title = title.value;
@@ -157,7 +158,7 @@ submitBut.addEventListener("click", () => {
 // create trash button in DOM and give it click functionality
 function trashCan(bookCard) {
     const trash = document.createElement("button");
-    trash.classList.add("can");
+   // trash.classList.add("can");
     //  trash.textContent = "remove";
     bookCard.appendChild(trash);
 }
@@ -174,10 +175,12 @@ shelf.addEventListener("click", function (e) {
     myLibrary.splice(index, 1);
     selectBook.remove();
 
-    //myLibrary = myLibrary.filter(book => book !== index);
+    //myLibrary = myLibrary.filter(book => book !== index); 
+    //! should be map and not filter.
     console.log(myLibrary);
 });
 
+/*
 // create read / unread toggle in DOM
 //check box/ toggle on each bookCard
 
@@ -197,7 +200,7 @@ function readToggle(bookCard) {
     bookCard.appendChild(label);
     label.appendChild(toggle);
     label.appendChild(span);
-}
+} */
 
 // click changes complete attribute to indicate read or unread
 
@@ -222,6 +225,8 @@ shelf.addEventListener("click", function (e) {
 /*
 function readBook(e) {
     // change to read
+
+
     console.log(e.target.checked);
 
     if (e.target.checked === false) {
@@ -260,18 +265,5 @@ function readBook(e) {
 showBooks();
 
 /* 
-Quality of life:
-"are you sure you want to delete" mesage on trash
-click on book card for it to flip and displays info
-if start date = today, automatically check box for currently reading
-//add today button or give placeholder of today  should be built in. check all browsers
-dont make two that are identical/ warn that this already exisits, do you want to cont?
-aloow name and have multply bookshelves
-sort bookshelves
-*/
 
-/* later updates for better code:
-showBooks() - use for each instead of for loop
-REMOVE - update to filter
-event deglegation - cleaner.- in progress
 */
