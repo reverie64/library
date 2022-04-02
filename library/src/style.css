@@ -4,6 +4,7 @@ body {
     margin: 0;
     /*  background-color: #F1F1E1;*/
     background-image: url("https://assets.website-files.com/60ffe15fbe0baf238818eec4/610178949d4c5ac82df89761_Interference.png");
+    box-sizing: border-box;
 }
 
 .container {
@@ -22,11 +23,14 @@ header {
     box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1);
     min-height: 5vh;
     align-items: center;
+    box-shadow: 0px 3px 5px 1px rgba(120,120,120,0.44);
+  
 }
 
 .add-icon {
     height: 50px;
     display: flex;
+    cursor: pointer;
 }
 
 .header-image {
@@ -55,8 +59,9 @@ h2 {
 }
 
 .trash-icon {
-    height: 70px;
-    width: 70px;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
 }
 
 .new-book {
@@ -70,15 +75,23 @@ h2 {
     flex-direction: column;
     flex-wrap: wrap;
     width: 40vh;
-    position: absolute;
+   /* position: absolute; */
+   box-shadow: 5px 5px 15px -1px rgba(0,0,0,0.75);
+   border-radius: 10px;
+}
+.formDiv > input {
+    border-radius: 5px;
 }
 
 .book {
     background-color: #079d93;
     height: 200px;
     width: 150px;
-    margin: 3px;
+    margin: 5px;
     border-radius: 10px;
+    box-shadow: 5px 5px 5px 1px rgba(120,120,120,0.44);
+    -webkit-box-shadow: 5px 5px 5px 1px rgba(120,120,120,0.44);
+    -moz-box-shadow: 5px 5px 5px 1px rgba(120,120,120,0.44);
 }
 
 button {
@@ -87,6 +100,9 @@ button {
     border-radius: 34px;
     background-color: #f1f1e1;
     color: #102257;
+    cursor: pointer;
+    border: none;   
+ 
 }
 
 :focus {

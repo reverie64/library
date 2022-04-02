@@ -1,5 +1,5 @@
-
-/* in process of converting to react app */
+/*
+/* in process of converting to react app 
 
 
 const container = document.getElementById("container");
@@ -57,7 +57,7 @@ class Book {
                 complete,
                 end,
                 rating
-            );*/
+            );
         //};
     }
 }
@@ -128,7 +128,7 @@ newBut.addEventListener("click", showForm);
     current = current.checked;
     complete = complete.checked;
     end = end.value;
-    rating = rating.value;*/
+    rating = rating.value;
 
 
 
@@ -200,7 +200,7 @@ function readToggle(bookCard) {
     bookCard.appendChild(label);
     label.appendChild(toggle);
     label.appendChild(span);
-} */
+} 
 
 // click changes complete attribute to indicate read or unread
 
@@ -262,7 +262,7 @@ function readBook(e) {
 
 //complete.addEventListener("click", readBook);
 
-showBooks();
+//showBooks();
 
 /* 
 
