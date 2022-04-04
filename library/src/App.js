@@ -1,14 +1,22 @@
 import BookCard from "./components/BookCard";
 import Navbar from "./components/Navbar";
-import React, { useState } from "react";
-import Form from "./components/Form";
+import React, { useState, useEffect } from "react";
 
 function App(props) {
-    const [myLibrary, setLib] = useState({Form});
+    const [myLibrary, setLib] = useState(
+        () => JSON.parse(localStorage.getItem("myLibrary")) ||
+    [ /*insert placeholder card? */ ]
+    ); //or add a book button?
+
     function addBook() {
         setLib((prevLib) => [...prevLib, myLibrary.length + 1]);
     }
-/*
+
+    useEffect(() => {
+        localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+    }, [myLibrary]);
+    
+    /*
     function toggle(id) {
         setLib((prevLib) => {
             return prevLib.map((book) => {
@@ -17,14 +25,14 @@ function App(props) {
                     : book;
             });
         });
-    */
+    }*/
 
     const bookElements = myLibrary.map((book) => (
         <BookCard
-       //     key={book.id}
-     //       id={book.id}
-         //   complete={book.complete}
-          //  toggle={toggle}
+            key={book.id}
+            id={book.id}
+            //    complete={book.complete}
+            //     toggle={toggle}
         />
     ));
 

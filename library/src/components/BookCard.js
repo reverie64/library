@@ -1,7 +1,7 @@
 import trashIcon from "../images/trashIcon.png";
 import React, { useState } from "react";
 
-// ! derived state
+// ! derived state change to use effect or move state to app
 
 function BookCard(props) {
     const [isRead, setRead] = useState(false);

@@ -9,10 +9,10 @@ import Form from "./Form";
 function Navbar(props) {
    
 
-    const [isShown, setShown] = useState(false);
+    const [show, setShow] = useState(false);
 
     function showForm() {
-        setShown((prevState) => !prevState);
+        setShow(prevShow => !prevShow);
     }
 
     return (
@@ -31,7 +31,7 @@ function Navbar(props) {
                 alt="click to add a new book."
             />
 
-            {isShown && <Form />}
+            {show && <Form />}
         </header>
     );
 }
