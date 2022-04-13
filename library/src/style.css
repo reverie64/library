@@ -1,6 +1,6 @@
 body {
     font-family: "IM Fell Great Primer", serif;
-    color: #102257;
+    color: #2c313f;
     margin: 0;
     /*  background-color: #F1F1E1;*/
     background-image: url("https://assets.website-files.com/60ffe15fbe0baf238818eec4/610178949d4c5ac82df89761_Interference.png");
@@ -9,7 +9,7 @@ body {
 
 .container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     min-height: 80vh;
     margin-left: calc(10%);
@@ -23,20 +23,26 @@ header {
     box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1);
     min-height: 5vh;
     align-items: center;
-    box-shadow: 0px 3px 5px 1px rgba(120,120,120,0.44);
-  
+    justify-content: space-between;
+    box-shadow: 0px 3px 5px 1px rgba(120, 120, 120, 0.44);
 }
 
 .add-icon {
     height: 50px;
-    display: flex;
     cursor: pointer;
+    padding-right: 20px;
 }
 
 .header-image {
     height: 70px;
     width: 70px;
     background-color: none;
+    padding-right: 20px;
+    padding-left: 10px;
+}
+
+h1 {
+    margin-right: auto;
 }
 
 h2 {
@@ -50,18 +56,21 @@ h2 {
 }
 
 .bookshelf {
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    background-color: #95d9da; /* dbb5ae  */
+    background-color: hsla(0, 0%, 98%, 0.67);
     min-height: 60vh;
     width: 100%;
+    box-shadow: 0px 3px 5px 1px rgba(120, 120, 120, 0.44);
 }
 
 .trash-icon {
     height: 50px;
     width: 50px;
     cursor: pointer;
+    
 }
 
 .new-book {
@@ -70,29 +79,43 @@ h2 {
 
 .formDiv {
     font-size: 20px;
-    background-color: #b8a4cc;
+    background-color: ;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     width: 40vh;
-   /* position: absolute; */
-   box-shadow: 5px 5px 15px -1px rgba(0,0,0,0.75);
-   border-radius: 10px;
+    /* position: absolute; */
+    box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
 }
 .formDiv > input {
     border-radius: 5px;
 }
 
-.book {
-    background-color: #079d93;
-    height: 200px;
-    width: 150px;
-    margin: 5px;
+.book { /* adjust to resize  */
+    background-color: #95d9da;
+    height: 50vh;
+    width: 35vh;
+    margin: 10px;
     border-radius: 10px;
-    box-shadow: 5px 5px 5px 1px rgba(120,120,120,0.44);
-    -webkit-box-shadow: 5px 5px 5px 1px rgba(120,120,120,0.44);
-    -moz-box-shadow: 5px 5px 5px 1px rgba(120,120,120,0.44);
+    box-shadow: 5px 5px 5px 1px rgba(120, 120, 120, 0.44);
+
 }
+
+.bookcard-icons {
+display: flex;
+justify-content: space-around;
+padding-top: 20px;
+}
+
+.bookcard-title {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+}
+
 
 button {
     height: 34px;
@@ -101,8 +124,7 @@ button {
     background-color: #f1f1e1;
     color: #102257;
     cursor: pointer;
-    border: none;   
- 
+    border: none;
 }
 
 :focus {

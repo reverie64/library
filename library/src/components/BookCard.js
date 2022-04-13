@@ -1,33 +1,26 @@
-import trashIcon from "../images/trashIcon.png";
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 
-// ! derived state change to use effect or move state to app
-
-function BookCard(props) {
-    const [isRead, setRead] = useState(false);
-
-    function readBook() {
-        setRead((prevState) => !prevState);
-    }
-
-    function trashCan() {
-        console.log("delete");
-    }
-
+const BookCard = (props) => {
     return (
-        <div className="book">
-            title: {props.title}
-            <img
-                onClick={trashCan}
-                className="trash-icon"
-                src={trashIcon}
-                alt="click to delete"
-            />
-            <div className="hi">
-                {isRead ? "read" : "unread"}
+        <div className="book" id={props.id} key={props.key}>
+            <div className="bookcard-icons">
+                <FontAwesomeIcon
+                    icon={faTrashCan}
+                    onClick={(event) =>
+                        props.removeBook(
+                            event //, book.id
+                        )
+                    }
+                    className="trash-icon"
+                    alt="click to delete"
+                />
+
+                {props.isRead ? "read" : "unread"}
                 <label className="complete">
                     <input
-                        onClick={readBook}
+                        onClick={props.readBook}
                         type="checkbox"
                         name="complete"
                         id="complete"
@@ -36,8 +29,10 @@ function BookCard(props) {
                     <span className="sliderround"></span>
                 </label>
             </div>
+
+            <span className="bookcard-title"> {`title: ${props.title}`} </span>
         </div>
     );
-}
+};
 
 export default BookCard;

@@ -1,39 +1,39 @@
-import addIcon from "../images/addIcon.png";
-import React, {useState} from "react";
+
+import React, { useState } from "react";
 import Form from "./Form";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSquarePlus } from "@fortawesome/free-regular-svg-icons";
+import { faBookBookmark } from "@fortawesome/free-solid-svg-icons";
 
 // click button to show div with form for new book / click again to hide
 // change button text new / hide
- //! derived state
+//! derived state
 
-function Navbar(props) {
-   
-
+const Navbar = (props) => {
     const [show, setShow] = useState(false);
 
     function showForm() {
-        setShow(prevShow => !prevShow);
+        setShow((prevShow) => !prevShow);
     }
 
     return (
         <header className="App-header">
-            <img
+            <FontAwesomeIcon
+                icon={faBookBookmark}
                 className="header-image"
-                src="https://toppng.com/uploads/preview/love-book-icon-filosofia-icon-11553486719rvc03m6nnz.png"
-                alt="book"
+                alt=""
             />
             <h1>my library</h1>
-
-            <img
+            <FontAwesomeIcon
+                icon={faSquarePlus}
                 onClick={showForm}
                 className="add-icon"
-                src={addIcon}
                 alt="click to add a new book."
             />
 
-            {show && <Form />}
+            {show && <Form addBook={props.addBook} />}
         </header>
     );
-}
+};
 
 export default Navbar;

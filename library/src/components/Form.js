@@ -1,19 +1,7 @@
-import React, { useState } from "react";
 
-function Form() {
-    const [formData, setFormData] = useState({
-        id: "",
-        title: "",
-        author: "",
-        pages: "",
-        start: "",
-        current: false,
-        complete: false,
-        end: "",
-        rating: "",
-    });
 
-    console.log(formData);
+const Form = (props) => {
+ const  { formData, setFormData } = props
 
     function handleChange(event) {
         const { name, value, type, checked } = event.target;
@@ -25,7 +13,8 @@ function Form() {
 
 function handleSubmit(event) {
     event.preventDefault()
-  //  submitToApi(formData)
+  //add form data to myLibrary, then that will add it to local storage?
+  props.addBook()
   console.log(formData)
 }
 
@@ -129,7 +118,7 @@ function handleSubmit(event) {
                     </select>
                 </fieldset>
 
-                <button type="reset">reset</button>
+                <button>reset</button>
 
                 <button>submit</button>
             </form>
