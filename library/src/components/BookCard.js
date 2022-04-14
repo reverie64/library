@@ -1,10 +1,11 @@
-import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import Form from "./Form";
 
 const BookCard = (props) => {
     return (
-        <div className="book" id={props.id} key={props.key}>
+        <div className="book" // id={props.formData.id} key={props.formData.id}
+        >
             <div className="bookcard-icons">
                 <FontAwesomeIcon
                     icon={faTrashCan}
@@ -30,7 +31,9 @@ const BookCard = (props) => {
                 </label>
             </div>
 
-            <span className="bookcard-title"> {`title: ${props.title}`} </span>
+            <span className="bookcard-title">
+             {`title: ${props.title}`}
+              </span>
         </div>
     );
 };

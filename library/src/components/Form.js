@@ -1,7 +1,9 @@
-
+// add book does not work now.
 
 const Form = (props) => {
- const  { formData, setFormData } = props
+
+
+    const  { formData, setFormData } = props
 
     function handleChange(event) {
         const { name, value, type, checked } = event.target;
@@ -11,16 +13,17 @@ const Form = (props) => {
             }));
     }
 
-function handleSubmit(event) {
-    event.preventDefault()
-  //add form data to myLibrary, then that will add it to local storage?
-  props.addBook()
-  console.log(formData)
-}
 
+    function handleSubmit(event) {
+        event.preventDefault()
+      //add form data to myLibrary, then that will add it to local storage?
+      props.addBook()
+      console.log(formData)
+    }
+    
     return (
         <div className="formDiv">
-            <form className="form" onSubmit={handleSubmit}>
+            <form className="form" onSubmit={props.handleSubmit}>
                 <fieldset>
                     <legend>book details</legend>
                     <label htmlFor="title">title </label>
@@ -120,7 +123,7 @@ function handleSubmit(event) {
 
                 <button>reset</button>
 
-                <button>submit</button>
+                <button type="submit">submit</button>
             </form>
         </div>
     );
