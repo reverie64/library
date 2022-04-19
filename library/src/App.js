@@ -1,22 +1,18 @@
-import BookCard from "./components/BookCard";
-import Navbar from "./components/Navbar";
-import Form from "./components/Form";
 import React, { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 
+import BookCard from "./components/BookCard";
+import Navbar from "./components/Navbar";
+import Form from "./components/Form";
+
 const App = () => {
-    const [myLibrary, setLib] = useState(() =>
-        JSON.parse(localStorage.getItem("myLibrary"))
-    );
     const [show, setShow] = useState(false);
 
-    function showForm() {
-        setShow((prevShow) => !prevShow);
-    }
+    const [isRead, setRead] = useState(false);
+    const [myLibrary, setLib] = useState([]);
 
-   
     const [formData, setFormData] = useState({
-        id: "",
+        id: nanoid(),
         title: "",
         author: "",
         pages: "",
@@ -25,31 +21,49 @@ const App = () => {
         complete: false,
         end: "",
         rating: "",
-        key: nanoid(),
     });
 
-    console.log(formData);
+    function handleChange(event) {
+        const { name, value, type, checked } = event.target;
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: type === "checkbox" ? checked : value,
+        }));
+    }
 
     function handleSubmit(event) {
         event.preventDefault();
-        //add form data to myLibrary, then that will add it to local storage?
-        setFormData();
-       // addBook();
-        console.log(formData);
-    }
-
-    function addBook() {
-        setLib((prevLib) => [...prevLib, myLibrary.length + 1]);
+        const { name, value, type, checked } = event.target;
+        //add form data to new book object that goes into myLibrary, then that will add it to local storage?
+        //needs to update myLib and then update book elements to display new book
+        addBook();
+       //reset()
     }
 
     useEffect(() => {
-        localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
-    }, [myLibrary]);
+        setLib((prevLib) => [formData, ...prevLib]);
+    }, );
 
-    const [isRead, setRead] = useState(false);
+
+    function addBook() {
+        console.log(formData);
+        setLib((prevLib) => [formData, ...prevLib]);
+        console.log(myLibrary);
+    }
+
+ 
+    function showForm() {
+        setShow((prevShow) => !prevShow);
+    }
     function readBook() {
         setRead((prevState) => !prevState);
     }
+
+
+
+    const handleReset = () => { setFormData()  
+    };
+
     /*
     function toggle(id) {
         setLib((prevLib) => {
@@ -63,7 +77,6 @@ const App = () => {
 
     const bookElements = myLibrary.map((book) => (
         <BookCard
-            key={formData.id}
             id={formData.id}
             title={formData.title}
             removeBook={removeBook}
@@ -83,13 +96,13 @@ const App = () => {
     return (
         <main className="App">
             <Navbar
-                addBook={addBook}
                 formData={formData}
-                setFormData={setFormData}
                 showForm={showForm}
+                show={show}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
             />
- {show && <Form addBook={addBook}
-    />}
+
             <div className="new-book">
                 <div className="container">
                     <div className="bookshelf">

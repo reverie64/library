@@ -1,32 +1,14 @@
-// add book does not work now.
-
 const Form = (props) => {
 
+    const  { formData, handleChange, handleSubmit, handleReset } = props
 
-    const  { formData, setFormData } = props
-
-    function handleChange(event) {
-        const { name, value, type, checked } = event.target;
-        setFormData((prevFormData) => ({
-                ...prevFormData,
-                [name]: type === "checkbox" ? checked : value,
-            }));
-    }
-
-
-    function handleSubmit(event) {
-        event.preventDefault()
-      //add form data to myLibrary, then that will add it to local storage?
-      props.addBook()
-      console.log(formData)
-    }
-    
+  
     return (
         <div className="formDiv">
-            <form className="form" onSubmit={props.handleSubmit}>
+            <form className="form" onSubmit={handleSubmit}>
                 <fieldset>
                     <legend>book details</legend>
-                    <label htmlFor="title">title </label>
+                    <label htmlFor="title">title</label>
                     <input
                         type="text"
                         name="title"
@@ -36,8 +18,7 @@ const Form = (props) => {
                         required
                     />
 
-                    <label>
-                        author
+                    <label htmlFor="author">author</label>
                         <input
                             type="text"
                             name="author"
@@ -45,10 +26,10 @@ const Form = (props) => {
                             onChange={handleChange}
                             value={formData.author}
                         />
-                    </label>
+                    
 
                     <label>
-                        pages
+                        pages     </label>
                         <input
                             type="number"
                             name="pages"
@@ -56,32 +37,32 @@ const Form = (props) => {
                             onChange={handleChange}
                             value={formData.pages}
                         />
-                    </label>
+               
 
                     <label>
-                        start date
+                        start date    </label>
                         <input
                             type="date"
                             name="start"
                             onChange={handleChange}
                             value={formData.start}
                         />
-                    </label>
+                 
 
                     <label>
-                        currently reading
+                        currently reading  </label>
                         <input
                             type="checkbox"
                             name="current"
                             onChange={handleChange}
                             checked={formData.current}
                         />
-                    </label>
+                   
                 </fieldset>
                 <fieldset>
                     <legend>finished</legend>
-                    read
-                    <label className="complete">
+                   
+                    <label className="complete">  read </label>
                         <input
                             type="checkbox"
                             name="complete"
@@ -90,16 +71,16 @@ const Form = (props) => {
                             checked={formData.complete}
                         />
                         <span className="sliderround"></span>
-                    </label>
+                   
                     <label>
-                        end date
+                        end date  </label>
                         <input
                             type="date"
                             name="end"
                             onChange={handleChange}
                             value={formData.end}
                         />
-                    </label>
+                  
                     <label htmlFor="rating">rating </label>
                     <select
                         id="rating"
@@ -121,7 +102,7 @@ const Form = (props) => {
                     </select>
                 </fieldset>
 
-                <button>reset</button>
+                <button onClick={handleReset} >reset</button>
 
                 <button type="submit">submit</button>
             </form>
