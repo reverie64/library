@@ -1,0 +1,211 @@
+body {
+    font-family: "Open Sans", sans-serif;
+    color: #2d334a;
+    letter-spacing: 0.1rem;
+    margin: 0;
+    background-color: #fffffe;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    min-height: 80vh;
+    margin-left: calc(10%);
+    margin-right: calc(10%);
+}
+
+header {
+    width: 100%;
+    background-color: #bae8e8;
+    display: flex;
+    box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1);
+    min-height: 5vh;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 3px 5px 1px rgba(120, 120, 120, 0.44);
+}
+
+.add-icon {
+    height: 50px;
+    cursor: pointer;
+    padding-right: 20px;
+}
+
+.header-image {
+    height: 70px;
+    width: 70px;
+    background-color: none;
+    padding-right: 20px;
+    padding-left: 10px;
+}
+
+h1 {
+    margin-right: auto;
+}
+
+h2 {
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: fit-content;
+    align-self: flex-start;
+}
+
+.bookshelf {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: hsla(0, 0%, 98%, 0.67);
+    min-height: 60vh;
+    width: 100%;
+    box-shadow: 0px 3px 5px 1px rgba(120, 120, 120, 0.44);
+}
+
+.trash-icon {
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+}
+
+.new-book {
+    text-align: left;
+}
+
+.formDiv {
+    font-size: 20px;
+    background-color: ;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 40vh;
+    /* position: absolute; */
+    box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+    background-color:  #fffffe;
+}
+.formDiv > input {
+    border-radius: 5px;
+}
+
+.book {
+    /* adjust to resize  */
+    background-color: #e3f6f5;
+    height: 50vh;
+    width: 35vh;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px 1px rgba(120, 120, 120, 0.44);
+}
+
+.bookcard-icons {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+}
+
+.bookcard-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+    font-size: 1.5rem;
+    overflow-wrap: break-word;
+    hyphens: manual;
+}
+
+button {
+    height: 34px;
+    width: 60px;
+    border-radius: 34px;
+    background-color: #ffd803;
+    color: #102257;
+    cursor: pointer;
+  
+}
+
+:focus {
+    background-color: #cfcfde;
+}
+
+/*
+a {
+  text-decoration: underline;
+}
+a:link {
+  color: blue;
+}
+a:visited {
+  color: purple;
+}
+*/
+
+/* --- toggle --- */
+/*
+.complete {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+*/
+/* Hide default HTML checkbox */
+/*
+.complete input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}*/
+
+/* The slider *//*
+.sliderround {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #cfcfde;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}*/
+/*
+.sliderround:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #f1f1e1;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+input:checked + .sliderround {
+    background-color: #ffd803;
+}
+
+input:focus + .sliderround {
+    box-shadow: 0 0 1px #ffd803;
+}
+
+input:checked + .sliderround:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+*/
+/* Rounded sliders *//*
+.sliderround {
+    border-radius: 34px;
+}
+
+.sliderround:before {
+    border-radius: 50%;
+}
+*/
