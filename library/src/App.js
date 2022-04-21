@@ -3,13 +3,14 @@ import { nanoid } from "nanoid";
 
 import BookCard from "./components/BookCard";
 import Navbar from "./components/Navbar";
-import Form from "./components/Form";
+
 
 const App = () => {
     const [show, setShow] = useState(false);
 
     const [isRead, setRead] = useState(false);
-    const [myLibrary, setLib] = useState([]);
+
+    const [library, setLib] = useState([]);
 
     const [formData, setFormData] = useState({
         id: nanoid(),
@@ -23,45 +24,63 @@ const App = () => {
         rating: "",
     });
 
-    function handleChange(event) {
-        const { name, value, type, checked } = event.target;
-        setFormData((prevFormData) => ({
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setFormData((prevFormData) => {
+            return {
             ...prevFormData,
-            [name]: type === "checkbox" ? checked : value,
-        }));
+            [name]: type === "checkbox" ? checked : value
+            }
+        });
     }
 
-    function handleSubmit(event) {
-        event.preventDefault();
-        const { name, value, type, checked } = event.target;
-        //add form data to new book object that goes into myLibrary, then that will add it to local storage?
-        //needs to update myLib and then update book elements to display new book
-        addBook();
-       //reset()
-    }
+const templateBook = () => {
+    setFormData({ id: "template",
+    title: "Your book here.",
+    author: "",
+    pages: "",
+    start: "",
+    current: false,
+    complete: false,
+    end: "",
+    rating: "",})
+}
 
+
+//! not adding formdata to library state array here 
+const addBook = () => {
+    console.log(formData);
+    setLib(library => [formData, ...library]);
+    console.log(library);
+}
+
+
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        //add form data to to local storage
+      addBook();
+        //reset()
+    }
+/*
     useEffect(() => {
-        setLib((prevLib) => [formData, ...prevLib]);
-    }, );
+        addBook()
+
+    }, [formData]);
+*/
 
 
-    function addBook() {
-        console.log(formData);
-        setLib((prevLib) => [formData, ...prevLib]);
-        console.log(myLibrary);
-    }
-
- 
-    function showForm() {
+    const showForm = () => {
         setShow((prevShow) => !prevShow);
     }
-    function readBook() {
+
+    const readBook = () => {
         setRead((prevState) => !prevState);
     }
 
-
-
-    const handleReset = () => { setFormData()  
+    const handleReset = () => {
+        setFormData("");
     };
 
     /*
@@ -75,23 +94,24 @@ const App = () => {
         });
     }*/
 
-    const bookElements = myLibrary.map((book) => (
+    const bookElements = library.map((book) => (
         <BookCard
-            id={formData.id}
+           key={formData.id}
+           id={formData.id}
             title={formData.title}
-            removeBook={removeBook}
+          //  removeBook={removeBook}
             readBook={readBook}
             //    complete={book.complete}
             //     toggle={toggle}
             isRead={isRead}
         />
     ));
-
-    function removeBook(event, bookId) {
+/*
+    const removeBook = (e, bookId) => {
         //    localStorage.removeItem('the item');
-        myLibrary.filter((book) => bookId === event.target.id);
+        library.filter((book) => bookId === e.target.id);
         console.log("delete");
-    }
+    }*/
 
     return (
         <main className="App">
@@ -108,7 +128,8 @@ const App = () => {
                     <div className="bookshelf">
                         <h2>my bookshelf</h2>
 
-                        {bookElements}
+                        {bookElements} 
+                     
                     </div>
                 </div>
             </div>
@@ -117,3 +138,8 @@ const App = () => {
 };
 
 export default App;
+
+
+/*    {bookElements} 
+{library.length < 1 ? templateBook : bookElements}
+*/ 

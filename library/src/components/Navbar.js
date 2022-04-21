@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSquarePlus } from "@fortawesome/free-regular-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faMinus } from "@fortawesome/free-solid-svg-icons";
 import { faBookBookmark } from "@fortawesome/free-solid-svg-icons";
 
 import Form from "./Form";
@@ -12,18 +13,30 @@ const Navbar = (props) => {
 
     return (
         <header className="App-header">
+
+        
             <FontAwesomeIcon
                 icon={faBookBookmark}
                 className="header-image"
                 alt=""
             />
             <h1>my library</h1>
-            <FontAwesomeIcon
-                icon={faSquarePlus}
-                onClick={showForm}
-                className="add-icon"
-                alt="click to add a new book."
-            />
+
+            {show ? (
+                <FontAwesomeIcon
+                    icon={faMinus}
+                    onClick={showForm}
+                    className="minus-icon"
+                    alt="minimize form."
+                />
+            ) : (
+                <FontAwesomeIcon
+                    icon={faPlus}
+                    onClick={showForm}
+                    className="add-icon"
+                    alt="show form to add a new book."
+                />
+            )}
 
             {show && (
                 <Form

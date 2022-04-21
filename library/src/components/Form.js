@@ -1,8 +1,6 @@
 const Form = (props) => {
+    const { formData, handleChange, handleSubmit, handleReset } = props;
 
-    const  { formData, handleChange, handleSubmit, handleReset } = props
-
-  
     return (
         <div className="formDiv">
             <form className="form" onSubmit={handleSubmit}>
@@ -19,68 +17,61 @@ const Form = (props) => {
                     />
 
                     <label htmlFor="author">author</label>
-                        <input
-                            type="text"
-                            name="author"
-                            placeholder="author"
-                            onChange={handleChange}
-                            value={formData.author}
-                        />
-                    
+                    <input
+                        type="text"
+                        name="author"
+                        placeholder="author"
+                        onChange={handleChange}
+                        value={formData.author}
+                    />
 
-                    <label>
-                        pages     </label>
-                        <input
-                            type="number"
-                            name="pages"
-                            placeholder="pages"
-                            onChange={handleChange}
-                            value={formData.pages}
-                        />
-               
+                    <label>pages </label>
+                    <input
+                        type="number"
+                        name="pages"
+                        placeholder="pages"
+                        onChange={handleChange}
+                        value={formData.pages}
+                    />
 
-                    <label>
-                        start date    </label>
-                        <input
-                            type="date"
-                            name="start"
-                            onChange={handleChange}
-                            value={formData.start}
-                        />
-                 
+                    <label>start date </label>
+                    <input
+                        type="date"
+                        name="start"
+                        onChange={handleChange}
+                        value={formData.start}
+                    />
 
-                    <label>
-                        currently reading  </label>
-                        <input
-                            type="checkbox"
-                            name="current"
-                            onChange={handleChange}
-                            checked={formData.current}
-                        />
-                   
+                    <label>currently reading </label>
+                    <input
+                        type="checkbox"
+                        name="current"
+                        onChange={handleChange}
+                        checked={formData.current}
+                       // {formData.start.value === today ? formData.current.checked}
+                    />
                 </fieldset>
                 <fieldset>
                     <legend>finished</legend>
-                   
-                    <label className="complete">  read </label>
-                        <input
-                            type="checkbox"
-                            name="complete"
-                            id="complete"
-                            onChange={handleChange}
-                            checked={formData.complete}
-                        />
-                        <span className="sliderround"></span>
-                   
-                    <label>
-                        end date  </label>
-                        <input
-                            type="date"
-                            name="end"
-                            onChange={handleChange}
-                            value={formData.end}
-                        />
-                  
+
+                    <label className="complete"> read </label>
+                    <input
+                        type="checkbox"
+                        name="complete"
+                        id="complete"
+                        onChange={handleChange}
+                        checked={formData.complete}
+                    />
+                    <span className="sliderround"></span>
+                    <br />
+                    <label>end date </label>
+                    <input
+                        type="date"
+                        name="end"
+                        onChange={handleChange}
+                        value={formData.end}
+                    />
+
                     <label htmlFor="rating">rating </label>
                     <select
                         id="rating"
@@ -102,12 +93,12 @@ const Form = (props) => {
                     </select>
                 </fieldset>
 
-                <button onClick={handleReset} >reset</button>
+                <button type="button" onClick={handleReset}>reset</button>
 
                 <button type="submit">submit</button>
             </form>
         </div>
     );
-}
+};
 
 export default Form;
