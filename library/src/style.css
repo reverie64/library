@@ -88,7 +88,7 @@ h2 {
     box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.75);
     border-radius: 10px;
     background-color:  #fffffe;
-
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     margin-left: calc(50%);
     margin-top: calc(30%);
 

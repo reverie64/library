@@ -8,8 +8,7 @@ import Form from "./Form";
 // click button to show div with form for new book / click again to hide
 // change button text new / hide
 
-const Navbar = (props) => {
-    const { showForm, show, formData, handleChange, handleSubmit } = props;
+const Navbar = ({ showForm, show, book, handleChange, handleSubmit }) => {
 
     return (
         <header className="App-header">
@@ -40,7 +39,7 @@ const Navbar = (props) => {
 
             {show && (
                 <Form
-                    formData={formData}
+                    book={book}
                     showForm={showForm}
                     show={show}
                     handleChange={handleChange}

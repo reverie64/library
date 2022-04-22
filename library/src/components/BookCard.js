@@ -1,17 +1,20 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 
-const BookCard = (props) => {
-    const { formData, removeBook, readBook } = props;
+
+const BookCard = ( { book, removeBook, readBook, isRead } ) => {
 
     return (
         <div className="book"   >
-            <div className="bookcard-icons">
+            <div className="bookcard-icons"
+             key={book.title} 
+         
+         >
                 <FontAwesomeIcon
                     icon={faTrashCan}
-                    onClick={(event) =>
+                    onClick={(e) =>
                         removeBook(
-                            event //, book.id
+                            e, book.id
                         )
                     }
                     className="trash-icon"
@@ -19,7 +22,7 @@ const BookCard = (props) => {
                 />
 
                 <label className="complete">
-                    {props.isRead ? "read" : "unread"}
+                    {isRead ? "read" : "unread"}
                 </label>
                 <input
                     onClick={readBook}
@@ -29,14 +32,10 @@ const BookCard = (props) => {
                     value="yes"
                 />
                 <span className="sliderround"></span>
-               
+                <span className="bookcard-title">{`title: ${book.title}`}</span>
             </div>
         </div>
     );
 };
 
 export default BookCard;
-
-/*     key={formData.index}  id={formData.id}>  
-
-<span className="bookcard-title">{`title: ${formData.title}`}</span> */
