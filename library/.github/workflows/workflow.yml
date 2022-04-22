@@ -8,8 +8,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Build
+      - name: Install and Build
         run: npm install
+
+      - name: Test
+        run: npm run test
           
       - name: Deploy
         run: |
@@ -17,3 +20,6 @@ jobs:
           git config --global user.email 'kristinh889@gmail.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}    
           npm run deploy
+
+         
+ npm run deploy
