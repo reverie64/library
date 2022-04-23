@@ -1,13 +1,14 @@
 import BookCard from "./BookCard";
 
-const Shelf = ({ book, removeBook, readBook, library }) => {
-    const bookElements = library.map((bookk) => (
+const Shelf = ({ book, removeBook, readBook, library, handleComplete }) => {
+    const bookElements = library.map((book) => (
         <BookCard
-            key={book.title}
+            key={book.id}
             title={book.title}
             removeBook={removeBook}
             readBook={readBook}
-            //    complete={book.complete}
+                checked={book.complete}
+                onChange={() => handleComplete(book)}
             //     toggle={toggle}
             //    isRead={isRead}
         />
