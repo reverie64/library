@@ -1,33 +1,45 @@
+import { ThemeProvider } from "styled-components";
+
 import React, { useState, useEffect, useReducer } from "react";
 import { nanoid } from "nanoid";
 
+import { lightTheme, darkTheme, GlobalStyles } from "./theme";
 import Navbar from "./components/Navbar";
 import Shelf from "./components/Shelf";
 import Component from "./components/Component";
 
-const initialBooks = [
-    {
-        id: 1,
-        title: "Example book here.",
-        read: false,
-        current: false,
-    },
-    {
-        id: 2,
-        title: "add your book.",
-        read: false,
-        current: false,
-    }
-]
+const initialBooks = (
+localStorage.getItem("library") == null
+        ? [{
+            id: 1,
+            title: "Example book here.",
+            read: false,
+            current: false,
+        },]
+        : JSON.parse(localStorage.getItem("library"))
+);
 
 const reducer = (state, action) => {
     switch (action.type) {
         case 'ADD':
-            return state // add book to library
+        const tempLibrary = state.concat(initialBooks)
+        console.log(tempLibrary)
+        return tempLibrary
+          //  const tempLibrary = state.map(prevLib => {
+         //       [...initialBooks, ...prevLib])
+         //   }
+        /*    
+        
+            let tempLibrary = [...state, ...initialBooks]
+            console.log(tempLibrary)
+            return tempLibrary*/
+
+             // localStorage.setItem("book", JSON.stringify(book)); // add book to library
      /*   case 'REMOVE':
             return state.filter((book) => {
                if (book.id === !action.id }) //remove book from library //state - action. */
-        case 'CURRENT':
+
+        case 'CURRENT': // currently reading checkbox
             return state.map((book) => {
                 if (book.id === action.id) { 
                     return {...book, current: !book.current }
@@ -35,7 +47,7 @@ const reducer = (state, action) => {
                      return book;
                  }
             })
-        case 'COMPLETE':
+        case 'COMPLETE': //toggle read to unread status
             return state.map((book) => {
                 if (book.id === action.id) {
                     return {...book, complete: !book.complete  };
@@ -52,7 +64,24 @@ const reducer = (state, action) => {
 
 const App = () => {
 
+    const [theme, setTheme] = useState("light");
+    const isDarkTheme = theme === "dark";
+    const toggleTheme = () => {
+        const updatedTheme = isDarkTheme ? "light" : "dark";
+        setTheme(updatedTheme);
+        localStorage.setItem("theme", updatedTheme);
+    };
 
+    useEffect(() => {
+        const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme && ["dark", "light"].includes(savedTheme)) {
+          setTheme(savedTheme);
+        } else if (prefersDark) {
+          setTheme("dark");
+        }
+      }, []);
 
 /*  //! actions change from state to useReducer
   // setLib((prevLib) => [
@@ -70,7 +99,7 @@ const removeBook = (e, bookId) => {
     
 
    const [isCurrent, setCurrent] = useState(false);
-        const curentBook = () => {
+        const currentBook = () => {
         setCurrent((prevState) => !prevState);
     };
 
@@ -147,11 +176,11 @@ const handleComplete = (book) => {
 
     //const [library, setLib] = useState(JSON.parse(localStorage.getItem("library")) || []);
 
-    /*
+    
     useEffect(() => {
         localStorage.setItem("library", JSON.stringify(library));
     }, [library]);
-
+/*
     useEffect(() => {
         const library = JSON.parse(localStorage.getItem("library"));
         if (library) {
@@ -229,6 +258,9 @@ handleAddNew()
    
 
     return (
+        <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
+        <>
+        <GlobalStyles/>
         <main className="App">
             <Navbar
             //    book={book}
@@ -236,6 +268,8 @@ handleAddNew()
                 show={show}
    //             handleChange={handleChange}
                 handleSubmit={handleSubmit}
+                toggleTheme={toggleTheme} 
+                        isDarkTheme={isDarkTheme}
             />
 
             <div className="new-book">
@@ -246,7 +280,7 @@ handleAddNew()
                       //  title={book.title}
                      //   book={book}
                         library={library}
-                     //   checked={book.complete}
+            
                         handleComplete={handleComplete}
                         handleAddNew={handleAddNew}
                         //  removeBook={removeBook}
@@ -259,6 +293,8 @@ handleAddNew()
                 <Component />
             </div>
         </main>
+        </>
+    </ThemeProvider>
     );
 };
 

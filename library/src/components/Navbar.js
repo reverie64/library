@@ -8,9 +8,11 @@ import Form from "./Form";
 // click button to show div with form for new book / click again to hide
 // change button text new / hide
 
-const Navbar = ({ showForm, show, book, handleChange, handleSubmit }) => {
+const Navbar = ({ showForm, show, book, handleChange, handleSubmit, toggleTheme, isDarkTheme }) => {
 
     return (
+
+
         <header className="App-header">
 
         
@@ -46,6 +48,10 @@ const Navbar = ({ showForm, show, book, handleChange, handleSubmit }) => {
                     handleSubmit={handleSubmit}
                 />
             )}
+            <button onClick={toggleTheme}>  {isDarkTheme ?
+            <span aria-label="Light mode" role="img">🌞</span> :
+            <span aria-label="Dark mode" role="img">🌜</span>}
+        </button>
         </header>
     );
 };
