@@ -1,35 +1,33 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import { reducer } from "../App.js";
 
+//                 {isRead ? "read" : "unread"}
 
-const BookCard = ( { book, removeBook, readBook, isRead } ) => {
+const BookCard = ({
+    book,
+    dispatch
 
+    //removeBook, readBook, isRead         onClick={readBook}
+    //        onClick={(e) => removeBook( e, book.id )  }
+}) => {
     return (
-        <div className="book"   >
-            <div className="bookcard-icons"
-             key={book.title} 
-         
-         >
+        <div className="book">
+            <div className="bookcard-icons" key={book.title}>
                 <FontAwesomeIcon
                     icon={faTrashCan}
-                    onClick={(e) =>
-                        removeBook(
-                            e, book.id
-                        )
-                    }
                     className="trash-icon"
                     alt="click to delete"
+                     onClick={ () => dispatch({ type: "REMOVE", payload: { id: book.id} })}
                 />
 
-                <label className="complete">
-                    {isRead ? "read" : "unread"}
-                </label>
+                <label className="complete"></label>
                 <input
-                    onClick={readBook}
                     type="checkbox"
                     name="complete"
                     id="complete"
                     value="yes"
+                    onClick={() => dispatch({ type: reducer.action.complete, payload: { id: book.id} })}
                 />
                 <span className="sliderround"></span>
                 <span className="bookcard-title">{`title: ${book.title}`}</span>

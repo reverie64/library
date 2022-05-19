@@ -1,22 +1,24 @@
 import BookCard from "./BookCard";
+import { reducer } from "../App";
 
-const Shelf = ({ book, removeBook, readBook, library, handleComplete }) => {
+//             onChange={() => handleComplete(book)}
+
+
+const Shelf = ({ book, library, dispatch} ) => {
+
+
     const bookElements = library.map((book) => (
         <BookCard
             key={book.id}
             title={book.title}
-            removeBook={removeBook}
-            readBook={readBook}
-                checked={book.complete}
-                onChange={() => handleComplete(book)}
-            //     toggle={toggle}
-            //    isRead={isRead}
+checked={book.complete}
+    
+            dispatch={dispatch}
         />
     ));
     return (
         <div className="bookshelf">
             <h2>my bookshelf</h2>
-
             {bookElements}
         </div>
     );

@@ -79,7 +79,7 @@ h2 {
 
 .formDiv {
     font-size: 20px;
-    background-color: ;
+   /* background-color: ;*/
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
