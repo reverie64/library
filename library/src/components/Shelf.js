@@ -1,25 +1,22 @@
 import BookCard from "./BookCard";
-import { reducer } from "../App";
 
-//             onChange={() => handleComplete(book)}
+
+/*//checked={book.complete}         title={book.title}
+     dispatch={dispatch}
+onChange={() => handleComplete(book)}*/
 
 
 const Shelf = ({ book, library, dispatch} ) => {
 
 
-    const bookElements = library.map((book) => (
-        <BookCard
-            key={book.id}
-            title={book.title}
-checked={book.complete}
-    
-            dispatch={dispatch}
-        />
-    ));
+
+
     return (
         <div className="bookshelf">
             <h2>my bookshelf</h2>
-            {bookElements}
+         {library.map((book, index) => {
+                        return <BookCard key={book.index} book={book} />;
+                    })}
         </div>
     );
 };

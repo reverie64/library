@@ -1,19 +1,33 @@
+/*
+  <form className="testform" onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            name="book"
+                            onChange={handleChange}
+                            value={book}
+                        />
 
+        
+                    </form>
+
+*/
 
 const Form = ( { book, handleChange, handleSubmit } ) => {
 
+
     return (
         <div className="formDiv">
-            <form className="form" onSubmit={handleSubmit}>
+            
+ <form className="form" onSubmit={handleSubmit}>
                 <fieldset>
                     <legend>book details</legend>
                     <label htmlFor="title">title</label>
                     <input
                         type="text"
-                        name="title"
+                        name="book"
                         placeholder="title"
                         onChange={handleChange}
-                        value={book.title}
+                        value={book}
                         required
                     />
 
@@ -21,11 +35,10 @@ const Form = ( { book, handleChange, handleSubmit } ) => {
 
 <button type="submit" >submit</button>
 </fieldset>
-</form>
+</form> 
+
 </div>
 );
 };
 
 export default Form;
-
-

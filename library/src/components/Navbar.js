@@ -5,10 +5,9 @@ import { faBookBookmark } from "@fortawesome/free-solid-svg-icons";
 
 import Form from "./Form";
 
-// click button to show div with form for new book / click again to hide
 // change button text new / hide
 
-const Navbar = ({
+const Navbar = ( {
     showForm,
     show,
     book,
@@ -16,7 +15,7 @@ const Navbar = ({
     handleSubmit,
     toggleTheme,
     isDarkTheme,
-}) => {
+} ) => {
     return (
         <header className="App-header">
             <FontAwesomeIcon
