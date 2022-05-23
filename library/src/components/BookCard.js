@@ -2,6 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 
 const BookCard = ({ book, dispatch }) => {
+
+      
     return (
         <div className="bookcard">
             <div
@@ -12,9 +14,9 @@ const BookCard = ({ book, dispatch }) => {
                     className="trash-icon"
                     alt="click to delete"
                     onClick={() =>
-                        dispatch({ type: "REMOVE", payload: { id: book.id } })
+                        dispatch({ type: "REMOVE", payload: { book: book } })
                     }
-                />
+                /> // when clicked, remove bookcard from dom
 
                 <label className="complete"></label>
                 <input
@@ -22,8 +24,8 @@ const BookCard = ({ book, dispatch }) => {
                     name="complete"
                     id="complete"
                     value="yes"
-                    onClick={() =>
-                        dispatch({ type: "COMPLETE", payload: { id: book.id } })
+                    onClick={e =>
+                        dispatch({ type: "COMPLETE", payload: { book: book} })
                     }
                 />
                 <span className="sliderround"></span>

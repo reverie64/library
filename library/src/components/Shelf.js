@@ -15,7 +15,7 @@ const Shelf = ({ book, library, dispatch} ) => {
         <div className="bookshelf">
             <h2>my bookshelf</h2>
          {library.map((book, index) => {
-                        return <BookCard key={book.index} book={book} />;
+                        return <BookCard key={book.index} book={book} dispatch={dispatch} />;
                     })}
         </div>
     );
