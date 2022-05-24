@@ -7,17 +7,18 @@ import Form from "./Form";
 
 // change button text new / hide
 
-const Navbar = ( {
+const Navbar = ({
     showForm,
     show,
     book,
     setBook,
-  //  handleChange,
+    handleChange,
     handleSubmit,
     toggleTheme,
     isDarkTheme,
-    totalBooks
-} ) => {
+    totalBooks,
+    dispatch,
+}) => {
     return (
         <header className="App-header">
             <FontAwesomeIcon
@@ -26,8 +27,8 @@ const Navbar = ( {
                 alt=""
             />
             <h1>my library</h1>
-Total books in library: {totalBooks} 
-          <button onClick={toggleTheme}>
+            Total books in library: {totalBooks}
+            <button onClick={toggleTheme}>
                 {isDarkTheme ? (
                     <span aria-label="Light mode" role="img">
                         🌞
@@ -53,17 +54,17 @@ Total books in library: {totalBooks}
                     alt="show form to add a new book."
                 />
             )}
-
             {show && (
                 <Form
                     book={book}
                     showForm={showForm}
                     show={show}
-                  setBook={setBook}
+                    setBook={setBook}
+                    dispatch={dispatch}
                     handleSubmit={handleSubmit}
+                    handleChange={handleChange}
                 />
             )}
-  
         </header>
     );
 };
