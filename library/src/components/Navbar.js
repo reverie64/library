@@ -11,7 +11,6 @@ const Navbar = ({
     showForm,
     show,
     book,
-    setBook,
     handleChange,
     handleSubmit,
     toggleTheme,
@@ -19,7 +18,8 @@ const Navbar = ({
     totalBooks,
     dispatch,
     title,
-    author
+    author,
+    id
 }) => {
     return (
         <header className="App-header">
@@ -61,10 +61,9 @@ const Navbar = ({
                     book={book}
                     showForm={showForm}
                     show={show}
-                   // setBook={setBook}
                     dispatch={dispatch}
-                    title={title}
-                    author={author}
+                    title={book.title}
+                    author={book.author}
                     handleSubmit={handleSubmit}
                     handleChange={handleChange}
                 />

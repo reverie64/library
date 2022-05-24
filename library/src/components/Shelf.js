@@ -9,14 +9,14 @@ const Shelf = ({ title, author, id, book, library, dispatch }) => {
         <div className="bookshelf">
             <h2>my bookshelf </h2>
             {JSON.stringify(book, null, 2)}
-            {library.map((title, author, id) => {
+            {library.map((book, id) => {
                 return (
                     <BookCard
-                        key={id}
+                        key={book.id}
                         book={book}
-                        title={title}
-                        id={id}
-                        author={author}
+                        title={book.title}
+                        id={book.id}
+                        author={book.author}
                         dispatch={dispatch}
                         library={library}
                     />
