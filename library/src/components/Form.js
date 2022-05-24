@@ -1,4 +1,6 @@
-const Form = ({ book, dispatch, handleSubmit, handleChange }) => {
+import { library } from "@fortawesome/fontawesome-svg-core";
+
+const Form = ({ title, author, book, library, dispatch, handleSubmit, handleChange }) => {
 
     return (
         <div className="formDiv">
@@ -11,7 +13,7 @@ const Form = ({ book, dispatch, handleSubmit, handleChange }) => {
                         name="title"
                         placeholder="title"
                         onChange={handleChange}
-                        value={book.title}
+                        value={title}
                         required
                     />
                      <label htmlFor="author">author</label>
@@ -20,7 +22,7 @@ const Form = ({ book, dispatch, handleSubmit, handleChange }) => {
                         name="author"
                         placeholder="author"
                         onChange={handleChange}
-                        value={book.author}
+                        value={author}
                     />
 
                     <button type="button">reset</button>

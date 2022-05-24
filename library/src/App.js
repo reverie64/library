@@ -1,42 +1,53 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { nanoid } from "nanoid";
 import { ThemeProvider } from "styled-components";
-//import { library } from "@fortawesome/fontawesome-svg-core";
 
 import { lightTheme, darkTheme, GlobalStyles } from "./theme";
 import Navbar from "./components/Navbar";
 import Shelf from "./components/Shelf";
 
 
+const initialState = { title: "", author: "", id: nanoid(), library: [], totalBooks: 0 };
+
 
 
 const reducer = (state, action) => {
     switch (action.type) {
+        case "VALUES":
+            const { name, value } = action.payload;
+            return { ...state, [name]: value };
+
         case "ADD":
             return {
-                library: [
+                ...state, 
+            //  //  title: action.payload.title,
+                 //       author: action.payload.author,
+                    //    id: nanoid(),
+                        library: [...state.library, action.payload.id
+                            //, state.author, state.title, state.id
+                    ]} //action.payload
+              /*  library: [
                     ...state.library,
                     {
-                        book: action.payload.book,
-                        title: action.payload.book.title,
-                        author: action.payload.book.author,
+                     //   book: action.payload.book,
+                        title: action.payload.title,
+                        author: action.payload.author,
                         id: nanoid(),
-                       // completed: false,
-                      //  current: false,
+                        // completed: false,
+                        //  current: false,
                     },
                 ],
                 totalBooks: state.totalBooks + 1,
-            };
+            };*/
         case "REMOVE":
             return {
-            library: [ 
-                 state.library.filter(
-                (book) => book.id !== action.payload
-            )],
-              totalBooks: state.totalBooks - 1,
-                 }
-            
-            ;
+                library: [
+                    state.library.filter(
+                        (book) => book.id !== action.payload.id
+                    ),
+                ],
+                totalBooks: state.totalBooks - 1,
+            };
 
         case "CURRENT":
             return {
@@ -45,7 +56,7 @@ const reducer = (state, action) => {
                         ? { ...book, current: !book.current }
                         : book
                 ),
-                 totalBooks: state.totalBooks,
+                totalBooks: state.totalBooks,
             };
         case "COMPLETED":
             return {
@@ -54,23 +65,41 @@ const reducer = (state, action) => {
                         ? { ...book, completed: !book.completed }
                         : book
                 ),
-                 totalBooks: state.totalBooks,
+                totalBooks: state.totalBooks,
             };
         default:
             return state;
     }
 };
 
-
 const App = () => {
-    const [{ library, totalBooks }, dispatch] = useReducer(reducer, { library: [], totalBooks: 0 });
-const [book, setBook  ] = useState(  {title: "",
+    const [{ title, author, id, library, totalBooks }, dispatch] = useReducer(
+        reducer,
+        initialState
+    );
+    /*const [book, setBook  ] = useState(  {title: "",
         author: "", 
     id: nanoid()
 }
         );
+*/
+
+  // base
+    //const { name, value, type, checked } = e.target;
+//const { name, value} = e.target;
+      //  setBook((prevBook) => {
+                  //...prevBook,
+               // [name]: value,
+                //type === "checkbox" ? checked : value,
 
 
+    const handleChange = (e) => {
+               const target = e.target
+                dispatch({ type: 'VALUES', payload: target})
+        console.log(target.value)
+            };
+       // });
+    
 
 
     const [show, setShow] = useState(false);
@@ -98,22 +127,23 @@ const [book, setBook  ] = useState(  {title: "",
         }
     }, []);
 
-
-const handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
+      dispatch({
+            type: "ADD",
+            payload: { id: id},
+        });
+        /*
         dispatch({
             type: "ADD",
             payload: { book: book },
-        });
-        console.log(book)
+        });*/
+       // console.log(book);
         //clear form setForm() -- but with the temp variable its
-      setBook({title: "", author: "", id: nanoid()});
-    
+      //  setBook({ title: "", author: "", id: nanoid() });
     };
 
-
-
-/*
+    /*
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch({
@@ -126,54 +156,39 @@ const handleSubmit = (e) => {
     
     };*/
 
-
-    // base
-    const handleChange = (e) => {
-        //!
-        //const { name, value, type, checked } = e.target;
-const { name, value} = e.target;
-        setBook((prevBook) => {
-            return {
-                ...prevBook,
-                [name]: value,
-                //type === "checkbox" ? checked : value,
-            };
-        });
-    };
-
-
-
     return (
         <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
             <>
                 <GlobalStyles />
-                    <main className="App">
-                        <Navbar
-                            toggleTheme={toggleTheme}
-                            isDarkTheme={isDarkTheme}
-                            showForm={showForm}
-                            show={show}
-                            handleSubmit={handleSubmit}
-                            handleChange={handleChange}
-                              setBook={setBook}
-                             book={book} // is t needed?
-                            totalBooks={totalBooks}
-                            dispatch={dispatch}
-                        />
+                <main className="App">
+                    <Navbar
+                        toggleTheme={toggleTheme}
+                        isDarkTheme={isDarkTheme}
+                        showForm={showForm}
+                        show={show}
+                        handleSubmit={handleSubmit}
+                        handleChange={handleChange}
+                       // setBook={setBook}
+                       // book={book} // is t needed?
+                        totalBooks={totalBooks}
+                        dispatch={dispatch}
+                        library={library}
+                    />
 
-                        <div className="new-book">
-                            <div className="container">
-
-                            
-                                <Shelf 
+                    <div className="new-book">
+                        <div className="container">
+                            <Shelf
                                 dispatch={dispatch}
-                                book={book}
+                            //    book={book}
                                 library={library}
-title={book.title} id={book.id} author={book.author}
-                                />
-                            </div>
+                                title={title}
+                                id={id}
+                                author={author}
+                    
+                            />
                         </div>
-                    </main>
+                    </div>
+                </main>
             </>
         </ThemeProvider>
     );

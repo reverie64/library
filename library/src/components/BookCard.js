@@ -5,7 +5,7 @@ import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 // { // when clicked, remove bookcard from dom}
 
 
-const BookCard = ( {book, dispatch } ) => {
+const BookCard = ( {title, book, dispatch, library, id } ) => {
 
 
     return (
@@ -26,11 +26,11 @@ const BookCard = ( {book, dispatch } ) => {
                     name="complete"
                     value="yes"
                     onClick={ () =>
-                        dispatch({ type: "COMPLETE", payload: { id: book.id } })
+                        dispatch({ type: "COMPLETE", payload: { id: library.id } })
                     }
                 />
                 <span className="sliderround"></span>
-                <span className="bookcard-title">{`title: ${book.title}`}</span>
+                <span className="bookcard-title">{`title: ${title}`}</span>
             </div>
         </div>
     );

@@ -18,6 +18,8 @@ const Navbar = ({
     isDarkTheme,
     totalBooks,
     dispatch,
+    title,
+    author
 }) => {
     return (
         <header className="App-header">
@@ -59,8 +61,10 @@ const Navbar = ({
                     book={book}
                     showForm={showForm}
                     show={show}
-                    setBook={setBook}
+                   // setBook={setBook}
                     dispatch={dispatch}
+                    title={title}
+                    author={author}
                     handleSubmit={handleSubmit}
                     handleChange={handleChange}
                 />
