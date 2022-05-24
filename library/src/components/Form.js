@@ -12,7 +12,7 @@
 
 */
 
-const Form = ( { book, handleChange, handleSubmit } ) => {
+const Form = ( { book, handleSubmit, setBook } ) => {
 
 
     return (
@@ -26,7 +26,7 @@ const Form = ( { book, handleChange, handleSubmit } ) => {
                         type="text"
                         name="book"
                         placeholder="title"
-                        onChange={handleChange}
+                        onChange={e => setBook(e.target.value)}
                         value={book}
                         required
                     />

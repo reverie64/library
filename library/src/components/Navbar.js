@@ -11,10 +11,12 @@ const Navbar = ( {
     showForm,
     show,
     book,
-    handleChange,
+    setBook,
+  //  handleChange,
     handleSubmit,
     toggleTheme,
     isDarkTheme,
+    totalBooks
 } ) => {
     return (
         <header className="App-header">
@@ -24,7 +26,18 @@ const Navbar = ( {
                 alt=""
             />
             <h1>my library</h1>
-
+Total books in library: {totalBooks} 
+          <button onClick={toggleTheme}>
+                {isDarkTheme ? (
+                    <span aria-label="Light mode" role="img">
+                        🌞
+                    </span>
+                ) : (
+                    <span aria-label="Dark mode" role="img">
+                        🌜
+                    </span>
+                )}
+            </button>
             {show ? (
                 <FontAwesomeIcon
                     icon={faMinus}
@@ -46,21 +59,11 @@ const Navbar = ( {
                     book={book}
                     showForm={showForm}
                     show={show}
-                    handleChange={handleChange}
+                  setBook={setBook}
                     handleSubmit={handleSubmit}
                 />
             )}
-            <button onClick={toggleTheme}>
-                {isDarkTheme ? (
-                    <span aria-label="Light mode" role="img">
-                        🌞
-                    </span>
-                ) : (
-                    <span aria-label="Dark mode" role="img">
-                        🌜
-                    </span>
-                )}
-            </button>
+  
         </header>
     );
 };

@@ -7,23 +7,8 @@ import { lightTheme, darkTheme, GlobalStyles } from "./theme";
 import Navbar from "./components/Navbar";
 import Shelf from "./components/Shelf";
 
-//! reducer handles actions for actual book object
 
 //! context will handle form data? or i would have to set state for each field
-/*const initialBook =
-    (
-    localStorage.getItem("library") == null
-     ? [
-    {
-        id: "",
-        title: "",
-          read: "",
-         current: "",
-        completed: "",
-    };
-,]
-  : JSON.parse(localStorage.getItem("library"))
-);0*/
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -37,12 +22,18 @@ const reducer = (state, action) => {
                         current: false,
                     },
                 ],
-                totalBooks: state.totalBooks + 1,
+                totalBooks: state.totalBooks + 1
             };
-        case "REMOVE":
-            return state.library.filter(
-                (book) => book.id !== action.payload.id
-            );
+        case "REMOVE": //need to remove bookcard on click
+            return {
+                library: [
+                    state.library.filter((book, index) => 
+                // return all books with an 
+            index !== action.payload.index
+                )
+                ],
+                totalBooks: state.totalBooks - 1
+            };
 
         case "CURRENT":
             return {
@@ -51,6 +42,7 @@ const reducer = (state, action) => {
                         ? { ...book, current: !book.current }
                         : book
                 ),
+                totalBooks: state.totalBooks
             };
         case "COMPLETED":
             return {
@@ -59,6 +51,7 @@ const reducer = (state, action) => {
                         ? { ...book, completed: !book.completed }
                         : book
                 ),
+                totalBooks: state.totalBooks
             };
         default:
             return state;
@@ -66,7 +59,7 @@ const reducer = (state, action) => {
 };
 
 const App = () => {
-    const [{ library }, dispatch] = useReducer(reducer, { library: [] });
+    const [{ library, totalBooks }, dispatch] = useReducer(reducer, { library: [], totalBooks: 0 });
     const [book, setBook] = useState();
 
     const handleSubmit = (e) => {
@@ -75,20 +68,32 @@ const App = () => {
             type: "ADD",
             payload: { book: book },
         });
-        //clear form setForm() -- but with the temp variable its
         setBook("");
     };
+/*
 
     const handleChange = (e) => {
-        //!
-        const { name, value, type, checked } = e.target;
+        { name, value, type, checked } = e.target;
+        setBook(  [name]: type === "checkbox" ? checked : value
+        )
+    }*/
+        //!*/
+
+        /*const { name, value, type, checked } = e.target;
         setBook((prevBook) => {
             return {
                 ...prevBook,
                 [name]: type === "checkbox" ? checked : value,
             };
         });
+    };*/
+
+
+    const [show, setShow] = useState(false);
+    const showForm = () => {
+        setShow((prevShow) => !prevShow);
     };
+
 
     const [theme, setTheme] = useState("light");
     const isDarkTheme = theme === "dark";
@@ -110,10 +115,7 @@ const App = () => {
         }
     }, []);
 
-    const [show, setShow] = useState(false);
-    const showForm = () => {
-        setShow((prevShow) => !prevShow);
-    };
+/*  onChange={handleChange}*/ 
 
     return (
         <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
@@ -127,8 +129,9 @@ const App = () => {
                         showForm={showForm}
                         show={show}
                         handleSubmit={handleSubmit}
-                        onChange={handleChange}
+                      setBook={setBook}
                         book={book} // is t needed?
+                        totalBooks={totalBooks}
                     />
                   
                     <div className="new-book">
