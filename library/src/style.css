@@ -1,11 +1,3 @@
-body {
-    font-family: "Open Sans", sans-serif;
-    color: #2d334a;
-    letter-spacing: 0.1rem;
-    margin: 0;
-    background-color: #fffffe;
-    box-sizing: border-box;
-}
 
 .container {
     display: flex;

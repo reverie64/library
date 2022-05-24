@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer } from "react";
-//import { nanoid } from "nanoid";
+import { nanoid } from "nanoid";
 import { ThemeProvider } from "styled-components";
 //import { library } from "@fortawesome/fontawesome-svg-core";
 
@@ -8,7 +8,7 @@ import Navbar from "./components/Navbar";
 import Shelf from "./components/Shelf";
 
 
-//! context will handle form data? or i would have to set state for each field
+
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -18,82 +18,65 @@ const reducer = (state, action) => {
                     ...state.library,
                     {
                         book: action.payload.book,
-                        completed: false,
-                        current: false,
+                        title: action.payload.book.title,
+                        author: action.payload.book.author,
+                        id: nanoid(),
+                       // completed: false,
+                      //  current: false,
                     },
                 ],
-                totalBooks: state.totalBooks + 1
+                totalBooks: state.totalBooks + 1,
             };
-        case "REMOVE": //need to remove bookcard on click
+        case "REMOVE":
             return {
-                library: [
-                    state.library.filter((book, index) => 
-                // return all books with an 
-            index !== action.payload.index
-                )
-                ],
-                totalBooks: state.totalBooks - 1
-            };
+            library: [ 
+                 state.library.filter(
+                (book) => book.id !== action.payload
+            )],
+              totalBooks: state.totalBooks - 1,
+                 }
+            
+            ;
 
         case "CURRENT":
             return {
-                library: state.library.map((book, index) =>
-                    index === action.payload.index
+                library: state.library.map((book, id) =>
+                    id === action.payload.id
                         ? { ...book, current: !book.current }
                         : book
                 ),
-                totalBooks: state.totalBooks
+                 totalBooks: state.totalBooks,
             };
         case "COMPLETED":
             return {
-                library: state.library.map((book, index) =>
-                    index === action.payload.index
+                library: state.library.map((book, id) =>
+                    id === action.payload.id
                         ? { ...book, completed: !book.completed }
                         : book
                 ),
-                totalBooks: state.totalBooks
+                 totalBooks: state.totalBooks,
             };
         default:
             return state;
     }
 };
 
+
 const App = () => {
     const [{ library, totalBooks }, dispatch] = useReducer(reducer, { library: [], totalBooks: 0 });
-    const [book, setBook] = useState();
+const [book, setBook  ] = useState(  {title: "",
+        author: "", 
+    id: nanoid()
+}
+        );
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        dispatch({
-            type: "ADD",
-            payload: { book: book },
-        });
-        setBook("");
-    };
-/*
 
-    const handleChange = (e) => {
-        { name, value, type, checked } = e.target;
-        setBook(  [name]: type === "checkbox" ? checked : value
-        )
-    }*/
-        //!*/
-
-        /*const { name, value, type, checked } = e.target;
-        setBook((prevBook) => {
-            return {
-                ...prevBook,
-                [name]: type === "checkbox" ? checked : value,
-            };
-        });
-    };*/
 
 
     const [show, setShow] = useState(false);
     const showForm = () => {
         setShow((prevShow) => !prevShow);
     };
-
 
     const [theme, setTheme] = useState("light");
     const isDarkTheme = theme === "dark";
@@ -115,39 +98,82 @@ const App = () => {
         }
     }, []);
 
-/*  onChange={handleChange}*/ 
+
+const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch({
+            type: "ADD",
+            payload: { book: book },
+        });
+        console.log(book)
+        //clear form setForm() -- but with the temp variable its
+      setBook({title: "", author: "", id: nanoid()});
+    
+    };
+
+
+
+/*
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch({
+            type: "ADD",
+            payload: { book: book },
+        });
+        console.log(book)
+        //clear form setForm() -- but with the temp variable its
+      setBook({title: "", author: "", id: new Date().getTime()});
+    
+    };*/
+
+
+    // base
+    const handleChange = (e) => {
+        //!
+        //const { name, value, type, checked } = e.target;
+const { name, value} = e.target;
+        setBook((prevBook) => {
+            return {
+                ...prevBook,
+                [name]: value,
+                //type === "checkbox" ? checked : value,
+            };
+        });
+    };
+
+
 
     return (
         <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
             <>
                 <GlobalStyles />
+                    <main className="App">
+                        <Navbar
+                            toggleTheme={toggleTheme}
+                            isDarkTheme={isDarkTheme}
+                            showForm={showForm}
+                            show={show}
+                            handleSubmit={handleSubmit}
+                            handleChange={handleChange}
+                              setBook={setBook}
+                             book={book} // is t needed?
+                            totalBooks={totalBooks}
+                            dispatch={dispatch}
+                        />
 
-                <main className="App">
-                    <Navbar
-                        toggleTheme={toggleTheme}
-                        isDarkTheme={isDarkTheme}
-                        showForm={showForm}
-                        show={show}
-                        handleSubmit={handleSubmit}
-                      setBook={setBook}
-                        book={book} // is t needed?
-                        totalBooks={totalBooks}
-                    />
-                  
-                    <div className="new-book">
-                        <div className="container">
-                            <Shelf
+                        <div className="new-book">
+                            <div className="container">
+
+                            
+                                <Shelf 
                                 dispatch={dispatch}
-                                // key={book.title}
-                                //   id={formData.title}
-                                //  title={book.title}
                                 book={book}
                                 library={library}
-                                //    complete={book.complete}
-                            />
+title={book.title} id={book.id} author={book.author}
+                                />
+                            </div>
                         </div>
-                    </div>
-                </main>
+                    </main>
             </>
         </ThemeProvider>
     );

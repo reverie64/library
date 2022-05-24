@@ -1,44 +1,35 @@
-/*
-  <form className="testform" onSubmit={handleSubmit}>
-                        <input
-                            type="text"
-                            name="book"
-                            onChange={handleChange}
-                            value={book}
-                        />
-
-        
-                    </form>
-
-*/
-
-const Form = ( { book, handleSubmit, setBook } ) => {
-
+const Form = ({ book, dispatch, handleSubmit, handleChange }) => {
 
     return (
         <div className="formDiv">
-            
- <form className="form" onSubmit={handleSubmit}>
+            <form className="form" onSubmit={handleSubmit}>
                 <fieldset>
                     <legend>book details</legend>
                     <label htmlFor="title">title</label>
                     <input
                         type="text"
-                        name="book"
+                        name="title"
                         placeholder="title"
-                        onChange={e => setBook(e.target.value)}
-                        value={book}
+                        onChange={handleChange}
+                        value={book.title}
                         required
                     />
+                     <label htmlFor="author">author</label>
+                    <input
+                        type="text"
+                        name="author"
+                        placeholder="author"
+                        onChange={handleChange}
+                        value={book.author}
+                    />
 
-<button type="button" >reset</button>
+                    <button type="button">reset</button>
 
-<button type="submit" >submit</button>
-</fieldset>
-</form> 
-
-</div>
-);
+                    <button type="submit">submit</button>
+                </fieldset>
+            </form>
+        </div>
+    );
 };
 
 export default Form;
