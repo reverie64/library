@@ -3,9 +3,13 @@ import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 
 
 // { // when clicked, remove bookcard from dom}
+//dispatch () =>  dispatch({ type: "REMOVE", payload: { book: book } })
+//() =>
+                 //       dispatch({ type: "COMPLETE", payload: { id: book.id } })
 
+//{handleChange, title, book, library, id, author, dispatch}
 
-const BookCard = ( {title, book, dispatch, library, id, author } ) => {
+const BookCard = ( {handleChange, title, book, id, author } ) => {
 
 
     return (
@@ -17,7 +21,7 @@ const BookCard = ( {title, book, dispatch, library, id, author } ) => {
                     icon={faTrashCan}
                     className="trash-icon"
                     alt="click to delete"
-                    onClick={ () =>  dispatch({ type: "REMOVE", payload: { book: book } }) } 
+               //     onClick={handleChange} 
                 /> 
 
                 <label className="complete"></label>
@@ -25,9 +29,7 @@ const BookCard = ( {title, book, dispatch, library, id, author } ) => {
                     type="checkbox"
                     name="complete"
                     value="yes"
-                    onClick={ () =>
-                        dispatch({ type: "COMPLETE", payload: { id: book.id } })
-                    }
+                //    onClick={handleChange}
                 />
                 <span className="sliderround"></span>
                 <span className="bookcard-title">{`title: ${book.title}`}</span>

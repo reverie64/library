@@ -6,6 +6,7 @@ import { faBookBookmark } from "@fortawesome/free-solid-svg-icons";
 import Form from "./Form";
 
 // change button text new / hide
+///    Total books in library: {totalBooks}    dispatch={dispatch}
 
 const Navbar = ({
     showForm,
@@ -15,8 +16,8 @@ const Navbar = ({
     handleSubmit,
     toggleTheme,
     isDarkTheme,
-    totalBooks,
-    dispatch,
+  //  totalBooks,
+  //  dispatch,
     title,
     author,
     id
@@ -29,7 +30,7 @@ const Navbar = ({
                 alt=""
             />
             <h1>my library</h1>
-            Total books in library: {totalBooks}
+         
             <button onClick={toggleTheme}>
                 {isDarkTheme ? (
                     <span aria-label="Light mode" role="img">
@@ -61,9 +62,9 @@ const Navbar = ({
                     book={book}
                     showForm={showForm}
                     show={show}
-                    dispatch={dispatch}
-                    title={book.title}
-                    author={book.author}
+                 
+               //     title={book.title}
+                //    author={book.author}
                     handleSubmit={handleSubmit}
                     handleChange={handleChange}
                 />

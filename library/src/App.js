@@ -1,82 +1,39 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { nanoid } from "nanoid";
+import axios from "axios";
 import { ThemeProvider } from "styled-components";
 
 import { lightTheme, darkTheme, GlobalStyles } from "./theme";
 import Navbar from "./components/Navbar";
 import Shelf from "./components/Shelf";
 
-/* before - sort of worked
-const initialState = { title: "", author: "", id: nanoid(), library: [], totalBooks: 0 };
+//const { name, value} = e.target;
+//  setBook((prevBook) => {
+//...prevBook,
+// [name]: value,
+//type === "checkbox" ? checked : value,
 
-input values = all form - entire book { all fields }
-take all input values to add case 
-
-cannot have library with out taking first book from form 
-(later check local storage, if local storage = 0, then require form  - use effect)
-
-*/
-
-    //const { name, value} = e.target;
-    //  setBook((prevBook) => {
-    //...prevBook,
-    // [name]: value,
-    //type === "checkbox" ? checked : value,
-
-
-  const initialState = {
-    book: { title: "", author: "", id: nanoid() },
-    library: [],
-    totalBooks: 0,
-};  
-
+/*
 const reducer = (state, action) => {
     switch (action.type) {
-        case "VALUES": // need all form values to equal book 
-            //action.payload;
-            return {
-                ...state, 
-              //  [action.payload.name]: action.payload.value
-             };
-
         case "ADD":
             return {
-               /* library: [
-                ...state.library, 
-                { book: action.payload.book,
-
-                }
-                   title: action.payload.title,
-                   author: action.payload.author,
-                   id: nanoid(),*/
-/*
                 library: [
-                  ...state.library, state.book
-                    action.payload.book,
-                    , state.author, state.title, state.id
-                ],
-            }; //action.payload*/
-
-          library: [
                     ...state.library,
                     {
-                      book: action.payload.book,
-                        title: action.payload.title,
-                        author: action.payload.author,
-                        id: action.payload.id,
+                        book: action.payload.book,
+
+                        id: nanoid(),
                         // completed: false,
                         //  current: false,
                     },
                 ],
                 totalBooks: state.totalBooks + 1,
             };
-
         case "REMOVE":
             return {
                 library: [
-                    state.library.filter(
-                        (book) => book.id !== action.payload.book.id
-                    ),
+                    state.library.filter((book) => book.id !== action.payload),
                 ],
                 totalBooks: state.totalBooks - 1,
             };
@@ -93,48 +50,79 @@ const reducer = (state, action) => {
         case "COMPLETED":
             return {
                 library: state.library.map((book, id) =>
-                    id === action.payload.book.id
+                    id === action.payload.id
                         ? { ...book, completed: !book.completed }
                         : book
                 ),
                 totalBooks: state.totalBooks,
             };
-           /* case "RESET":
-                return 
-                    init(action.payload)
-                */
         default:
             return state;
     }
 };
-
+*/
 const App = () => {
-  /*  const [
-        {
-            book //: { title, author, id }
-          //  library,
-         //   totalBooks,
-        },
-        dispatch,
-    ] = useReducer(reducer, initialState, init);*/
+    /*
+  const [{ library, totalBooks }, dispatch] = useReducer(reducer, { library: [], totalBooks: 0 });
+const [book, setBook  ] = useState(  {title: "",
+        author: "", 
+    id: nanoid()
+}
+        );
+docs.title
+*/
 
+    const [library, setLibrary] = useState([]);
+    const [book, setBook] = useState();
 
-const [
-        {
-            book, //: { title, author, id }
-            library,
-            totalBooks,
-        },
-        dispatch,
-    ] = useReducer(reducer, initialState);
+    let url = `http://openlibrary.org/search.json?`;
 
-
-    const handleChange = (e) => {
-        const target = e.target;
-        dispatch({ type: "VALUES", payload: target });
-        console.log(target.value);
+    const getBookInfo = async () => {
+        const result = await axios.get(`${url}title=${book}`);
+        console.log(result.docs);
+        setLibrary(result.docs);
     };
 
+/* 
+    const getBookImage = async () => {
+   
+        async function fetchImage(url) {
+    const img = new Image();
+    return new Promise((res, rej) => {
+        img.onload = () => res(img);
+        img.onerror = e => rej(e);
+        img.src = url;
+    });
+}
+const img = await fetchImage('https://covers.openlibrary.org/b/id/12547191-L.jpg');
+const w = img.width;
+const h = img.height;
+    };*/
+
+    /*useEffect(() => {
+		getBookInfo();
+	}, []);*/
+
+    //const [book, setBook] = useState();
+
+    const handleChange = (e) => {
+        //!
+        //const { name, value, type, checked } = e.target;
+       /* const { name, value } = e.target;
+        setBook((prevBook) => {
+            return {
+                ...prevBook,
+                [name]: value,
+                //type === "checkbox" ? checked : value,
+            };
+        });*/
+        setBook(e.target.value)
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        getBookInfo();
+    };
 
     const [show, setShow] = useState(false);
     const showForm = () => {
@@ -161,17 +149,6 @@ const [
         }
     }, []);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        dispatch({
-            type: "ADD",
-          //  payload: { book: book },
-            payload: book,
-            // reset form 
-        });
-
-
-       
     return (
         <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
             <>
@@ -184,8 +161,8 @@ const [
                         show={show}
                         handleSubmit={handleSubmit}
                         handleChange={handleChange}
-                        totalBooks={totalBooks}
-                        dispatch={dispatch}
+                        //  totalBooks={totalBooks}
+                        // dispatch={dispatch}
                         library={library}
                         book={book}
                     />
@@ -193,12 +170,13 @@ const [
                     <div className="new-book">
                         <div className="container">
                             <Shelf
-                                dispatch={dispatch}
+                                //   dispatch={dispatch}
                                 book={book}
                                 library={library}
-                                title={book.title}
-                                id={book.id}
-                                author={book.author}
+                      //          title={book.title}
+                       //         id={book.id}
+                       //         author={book.author}
+                                
                             />
                         </div>
                     </div>
@@ -206,7 +184,6 @@ const [
             </>
         </ThemeProvider>
     );
-};
 };
 
 export default App;
